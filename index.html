@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주식회사 라릭 | Larix Inc.</title>
+<meta name="description" content="주식회사 라릭은 소프트웨어·AI 컨설팅, 신규사업 개발, 문화예술 공연 기획, 음원 제작·컨설팅을 합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EFF1ED;
+  --ink:#0E1211;
+  --text:#0F1412;
+  --soft:#6A736D;
+  --line:rgba(15,20,18,.14);
+  --accent:#0F6B4F;
+  --sans:"IBM Plex Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  --pad:clamp(1.25rem,5vw,5rem);
+  --maxw:80rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#EFF1ED; --text:#0F1412; --soft:#6A736D; }
+}
+:root[data-theme="dark"]{ --bg:#EFF1ED; --text:#0F1412; --soft:#6A736D; }
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--sans); font-weight:300;
+  font-size:clamp(.9375rem,.9rem + .2vw,1.0625rem);
+  line-height:1.7; letter-spacing:-.012em; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{ background:var(--accent); color:#fff; }
+a{ color:inherit; }
+a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad); position:relative; z-index:1; }
+
+/* ============ LOGO — 16선 로제트 (명함 확정안 B-2a) ============
+   원본 치수(mm): 선 굵기 0.6 / 안쪽 여백 반지름 3 / 선 끝 9.5·7.0 교대 / 중앙 원 r1.0
+   전체 반지름 9.8 → 지름 19.6 을 1 단위(--u)의 기준으로 삼는다 */
+.rosette{
+  --rs:20px;
+  --u:calc(var(--rs) / 19.6);
+  position:relative; display:inline-block; flex:0 0 auto;
+  width:var(--rs); height:var(--rs); color:inherit;
+}
+.rosette .rot{ position:absolute; inset:0; will-change:transform; }
+.rosette i{
+  position:absolute; left:50%; bottom:50%;
+  width:max(1px, calc(var(--u) * .6));
+  height:calc(var(--u) * var(--len,6.5));
+  margin-left:calc(max(1px, calc(var(--u) * .6)) / -2);
+  background:currentColor; border-radius:99px;
+  transform-origin:50% 100%;
+  transform:rotate(var(--a,0deg)) translateY(calc(var(--u) * -3));
+}
+.rosette i:nth-child(odd){ --len:6.5; }   /* 9.5 - 3 */
+.rosette i:nth-child(even){ --len:4; }    /* 7.0 - 3 */
+.rosette i:nth-child(1){ --a:0deg }    .rosette i:nth-child(2){ --a:22.5deg }
+.rosette i:nth-child(3){ --a:45deg }   .rosette i:nth-child(4){ --a:67.5deg }
+.rosette i:nth-child(5){ --a:90deg }   .rosette i:nth-child(6){ --a:112.5deg }
+.rosette i:nth-child(7){ --a:135deg }  .rosette i:nth-child(8){ --a:157.5deg }
+.rosette i:nth-child(9){ --a:180deg }  .rosette i:nth-child(10){ --a:202.5deg }
+.rosette i:nth-child(11){ --a:225deg } .rosette i:nth-child(12){ --a:247.5deg }
+.rosette i:nth-child(13){ --a:270deg } .rosette i:nth-child(14){ --a:292.5deg }
+.rosette i:nth-child(15){ --a:315deg } .rosette i:nth-child(16){ --a:337.5deg }
+.rosette b{
+  position:absolute; left:50%; top:50%;
+  width:max(2px, calc(var(--u) * 2)); height:max(2px, calc(var(--u) * 2));
+  margin-left:calc(max(2px, calc(var(--u) * 2)) / -2);
+  margin-top:calc(max(2px, calc(var(--u) * 2)) / -2);
+  background:currentColor; border-radius:50%;
+}
+.rosette.sm{ --rs:20px; }
+.rosette.lg{ --rs:clamp(70px,13.5vw,158px); }
+.rosette.huge{ --rs:clamp(200px,46vw,440px); }
+
+/* ============ structural grid ============ */
+#grid{ position:fixed; inset:0; z-index:0; pointer-events:none; max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); }
+#grid div{ height:100%; background-image:repeating-linear-gradient(to right, rgba(15,20,18,.055) 0 1px, transparent 1px calc(100%/6)); }
+@media (max-width:860px){ #grid{ display:none; } }
+.layer{ position:relative; z-index:1; }
+
+/* ============ nav ============ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:8;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:1.1rem var(--pad); font-size:.8125rem; transition:background-color .3s;
+}
+.nav.solid{ background:color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter:blur(10px); }
+.nav .mark{ display:flex; align-items:center; gap:.65rem; font-weight:600; letter-spacing:-.03em; font-size:1rem; text-decoration:none; color:var(--text); transition:color .3s; }
+.nav ul{ display:flex; gap:clamp(1rem,2.5vw,2.25rem); list-style:none; margin:0; padding:0; }
+.nav ul a{ text-decoration:none; color:var(--soft); transition:color .25s; }
+.nav ul a:hover, .nav ul a.on{ color:var(--text); }
+.nav ul a.on{ font-weight:400; }
+/* over a dark panel the bar inverts instead of sitting on it as a light band */
+.nav.over-dark{ background:color-mix(in srgb, var(--ink) 80%, transparent); }
+.nav.over-dark .mark{ color:#EFF1ED; }
+.nav.over-dark ul a{ color:#8E9A94; }
+.nav.over-dark ul a:hover, .nav.over-dark ul a.on{ color:#EFF1ED; }
+
+/* ============ strings ============ */
+.string{ display:block; width:100%; height:46px; touch-action:pan-y; cursor:crosshair; }
+.rule{ transform:scaleX(0); transform-origin:left; transition:transform 1.1s cubic-bezier(.22,.7,.2,1); }
+.in .rule{ transform:scaleX(1); }
+
+/* ============ hero ============ */
+/* padding-top/bottom only — a `padding` shorthand here would cancel .wrap's side gutters */
+.hero{ min-height:100svh; display:flex; flex-direction:column; justify-content:space-between; padding-top:6.5rem; padding-bottom:clamp(1.5rem,5vh,3rem); }
+.hero-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; font-family:var(--mono); font-size:.6875rem; color:var(--soft); line-height:1.9; }
+.hero-top p{ margin:0; }
+.hero-top .r{ text-align:right; }
+.lockup{ display:flex; align-items:center; gap:clamp(1.1rem,3.6vw,2.8rem); }
+.wordmark{ margin:0; font-weight:600; letter-spacing:-.055em; line-height:.85; font-size:clamp(3.4rem,15vw,11.5rem); }
+.wordmark .sub{ display:block; font-family:var(--mono); font-weight:400; font-size:clamp(.625rem,1.2vw,.8125rem); letter-spacing:.42em; color:var(--soft); margin-top:1.25rem; }
+.lede{ margin:clamp(1.8rem,5vh,3rem) 0 0; font-size:clamp(1.15rem,2.6vw,1.9rem); font-weight:200; line-height:1.45; letter-spacing:-.03em; max-width:24ch; }
+.hero-foot{ display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap; font-family:var(--mono); font-size:.6875rem; color:var(--soft); }
+.hero-foot p{ margin:0; }
+.hint{ transition:opacity .7s ease; }
+.hint.gone{ opacity:0; }
+.hero .string{ height:clamp(70px,11vh,110px); }
+
+/* ============ sections ============ */
+section{ padding:clamp(4.5rem,13vh,9rem) 0; }
+.fade{ opacity:0; transform:translateY(6px); transition:opacity .8s ease .1s, transform .8s cubic-bezier(.22,.7,.2,1) .1s; }
+.in .fade{ opacity:1; transform:none; }
+.label{ font-family:var(--mono); font-size:.6875rem; color:var(--soft); margin:.5rem 0 clamp(2rem,6vh,3.5rem); display:flex; gap:1.2rem; align-items:baseline; }
+.label b{ font-weight:400; color:var(--text); }
+
+/* cursor glow on the dark panels */
+.glow{ position:relative; overflow:hidden; }
+.glow::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(480px circle at var(--mx,50%) var(--my,-40%), rgba(95,184,148,.16), transparent 68%);
+  opacity:0; transition:opacity .6s ease;
+}
+.glow.lit::before{ opacity:1; }
+
+/* ============ statement ============ */
+.statement{ background:var(--ink); color:#EFF1ED; margin:clamp(2rem,8vh,5rem) 0; padding:clamp(5rem,16vh,11rem) 0; }
+.statement p{ margin:0; max-width:17ch; font-size:clamp(1.75rem,6vw,4.2rem); font-weight:200; line-height:1.2; letter-spacing:-.045em; }
+.statement .by{ display:block; margin-top:clamp(2rem,6vh,3.5rem); font-family:var(--mono); font-size:.6875rem; color:#7D8A84; }
+
+/* ============ work ============ */
+.work{ display:grid; grid-template-columns:minmax(0,23rem) minmax(0,1fr); gap:clamp(1.5rem,5vw,5rem); align-items:start; }
+.tabs{ display:flex; flex-direction:column; position:sticky; top:6rem; }
+.tab{
+  appearance:none; background:none; border:0; border-top:1px solid var(--line);
+  padding:1.1rem 0; text-align:left; cursor:pointer; color:var(--soft);
+  font-family:var(--sans); font-weight:300; font-size:clamp(1rem,2vw,1.3rem);
+  letter-spacing:-.03em; line-height:1.35; display:flex; align-items:center; gap:.85rem;
+  transition:color .3s, padding-left .4s cubic-bezier(.2,.7,.2,1);
+}
+.tab:last-child{ border-bottom:1px solid var(--line); }
+.tab .dot{ width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:0; transform:scale(.4); transition:opacity .3s, transform .35s cubic-bezier(.2,.7,.2,1); flex:0 0 auto; }
+.tab:hover{ color:var(--text); }
+.tab[aria-selected="true"]{ color:var(--text); font-weight:400; padding-left:.2rem; }
+.tab[aria-selected="true"] .dot{ opacity:1; transform:scale(1); }
+.panels{ position:relative; min-height:31rem; }
+.panel{ position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity .45s ease, transform .5s cubic-bezier(.22,.7,.2,1), visibility .45s; }
+.panel[data-on="true"]{ opacity:1; visibility:visible; transform:none; position:relative; }
+.panel h3{ margin:0 0 1.3rem; font-weight:200; font-size:clamp(1.6rem,4vw,2.6rem); letter-spacing:-.045em; line-height:1.25; max-width:16ch; }
+.panel p{ margin:0 0 2rem; max-width:50ch; color:color-mix(in srgb, var(--text) 84%, transparent); }
+.panel ul{ list-style:none; margin:0 0 2.2rem; padding:0; font-size:.9375rem; columns:2; column-gap:2rem; }
+@media (max-width:640px){ .panel ul{ columns:1; } }
+.panel li{ padding:.5rem 0; color:var(--soft); break-inside:avoid; }
+.panel li::before{ content:""; display:inline-block; width:.6rem; height:1px; background:var(--accent); vertical-align:middle; margin-right:.7rem; }
+.motif{ width:100%; height:clamp(160px,24vh,230px); display:block; }
+@media (max-width:860px){
+  .work{ grid-template-columns:1fr; }
+  .tabs{ position:static; flex-direction:row; overflow-x:auto; gap:1.4rem; border-bottom:1px solid var(--line); scrollbar-width:none; }
+  .tabs::-webkit-scrollbar{ display:none; }
+  .tab{ border:0; white-space:nowrap; padding:.6rem 0 1rem; font-size:1rem; }
+  .tab:last-child{ border:0; }
+  .tab[aria-selected="true"]{ padding-left:0; }
+  .panels{ min-height:0; margin-top:2rem; }
+  .panel{ position:relative; display:none; }
+  .panel[data-on="true"]{ display:block; }
+}
+
+/* ============ contact ============ */
+.contact{ background:var(--ink); color:#EFF1ED; }
+.contact .label{ color:#7D8A84; }
+.contact .label b{ color:#EFF1ED; }
+.contact h2{ margin:0 0 clamp(2rem,6vh,3rem); font-weight:200; font-size:clamp(1.8rem,5.5vw,3.6rem); line-height:1.25; letter-spacing:-.04em; max-width:16ch; }
+.mailrow{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.5rem; }
+.mail{ font-weight:300; font-size:clamp(1.3rem,4.2vw,2.4rem); letter-spacing:-.04em; text-decoration:none; border-bottom:1px solid rgba(239,241,237,.3); padding-bottom:.08em; transition:border-color .3s, color .3s; }
+.mail:hover{ color:#5FB894; border-color:#5FB894; }
+.copy{ background:none; border:1px solid rgba(239,241,237,.3); color:#AEB8B3; font-family:var(--mono); font-size:.6875rem; padding:.5rem .9rem; border-radius:99px; cursor:pointer; transition:.25s; }
+.copy:hover{ border-color:#5FB894; color:#5FB894; }
+.copy[data-done="true"]{ border-color:#5FB894; color:var(--ink); background:#5FB894; }
+.contact footer{ margin-top:clamp(4rem,12vh,7rem); padding-top:2rem; border-top:1px solid rgba(239,241,237,.16); }
+/* flex, not auto-fit columns: two entries would otherwise stretch across the full width */
+.fgrid{ display:flex; flex-wrap:wrap; gap:1.5rem clamp(2.5rem,7vw,6rem); font-size:.8125rem; color:#AEB8B3; }
+.fgrid dt{ font-family:var(--mono); font-size:.625rem; color:#6E7A74; margin-bottom:.4rem; letter-spacing:.06em; }
+.fgrid dd{ margin:0; }
+.fnote{ margin:2.5rem 0 0; font-family:var(--mono); font-size:.625rem; color:#5E6A64; }
+/* the mark sits on the bottom edge, cropped exactly at its equator */
+.bigrose{
+  --big:clamp(200px,46vw,440px);
+  display:flex; justify-content:center; align-items:flex-start;
+  margin:clamp(2.5rem,9vh,5rem) 0 0;
+  height:calc(var(--big) / 2); overflow:hidden;
+  color:rgba(239,241,237,.09); pointer-events:none;
+}
+.bigrose .rosette.huge{ --rs:var(--big); }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ transition-duration:.001ms !important; }
+  .fade{ opacity:1; transform:none; } .rule{ transform:scaleX(1); }
+}
+</style>
+</head>
+<body>
+
+<div id="grid" aria-hidden="true"><div></div></div>
+
+<nav class="nav" aria-label="주요">
+  <a class="mark" href="#top"><span class="rosette sm" aria-hidden="true"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span>라릭</a>
+  <ul>
+    <li><a href="#work">하는 일</a></li>
+    <li><a href="#contact">문의</a></li>
+  </ul>
+</nav>
+
+<div class="layer" id="top">
+
+  <header class="hero wrap">
+    <div class="hero-top">
+      <p>SEOUL, KR</p>
+      <p class="r">주식회사 라릭<br>larix.kr</p>
+    </div>
+    <div>
+      <div class="lockup">
+        <span class="rosette lg" aria-hidden="true"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span>
+        <h1 class="wordmark">라릭<span class="sub">LARIX INC.</span></h1>
+      </div>
+      <p class="lede">아직 형태가 없는 것을<br>형태로 만듭니다.</p>
+    </div>
+    <div>
+      <canvas class="string" data-weight="1.6" aria-hidden="true"></canvas>
+      <div class="hero-foot">
+        <p>소프트웨어 · AI &nbsp;/&nbsp; 신규사업 &nbsp;/&nbsp; 공연 기획 &nbsp;/&nbsp; 음원 제작</p>
+        <p class="hint" id="hint">로고와 선을 건드려 보세요</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="statement glow">
+    <div class="wrap">
+      <canvas class="string rule" data-tone="dark" aria-hidden="true"></canvas>
+      <p class="fade">좋은 판단은 한참 뒤에 증명됩니다.<span class="by">— 라릭이 일을 고르는 기준</span></p>
+    </div>
+  </section>
+
+  <section id="work" class="wrap">
+    <canvas class="string rule" aria-hidden="true"></canvas>
+    <p class="label fade"><b>01</b> 하는 일</p>
+    <div class="work fade">
+      <div class="tabs" role="tablist" aria-label="사업영역"></div>
+      <div class="panels"></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact glow">
+    <div class="wrap">
+      <canvas class="string rule" data-tone="dark" aria-hidden="true"></canvas>
+      <p class="label fade"><b>02</b> 문의</p>
+      <h2 class="fade">무엇을 만들지<br>먼저 이야기하죠</h2>
+      <div class="mailrow fade">
+        <a class="mail" id="mail" href="mailto:david@larix.kr">david@larix.kr</a>
+        <button class="copy" id="copy" type="button">주소 복사</button>
+      </div>
+      <footer>
+        <dl class="fgrid">
+          <div><dt>COMPANY</dt><dd>주식회사 라릭 / Larix Inc.</dd></div>
+          <div><dt>EMAIL</dt><dd>david@larix.kr</dd></div>
+        </dl>
+        <p class="fnote">© 2026 LARIX INC.</p>
+        <div class="bigrose" aria-hidden="true"><span class="rosette huge"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span></div>
+      </footer>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var coarse = window.matchMedia("(pointer: coarse)").matches;
+
+  /* ================= logo: rays reach toward the cursor ================= */
+  var RAYS = 16;
+  var roses = [];
+  document.querySelectorAll(".rosette").forEach(function(el){
+    var items = el.querySelectorAll(".rot > i");
+    var rays = [];
+    for(var i=0;i<items.length;i++){
+      var base = (i % 2 === 0) ? 6.5 : 4.0;          // nth-child(odd) is index 0, 2, 4…
+      rays.push({ el:items[i], base:base, ang:i*(360/RAYS) - 90, cur:base, target:base });
+    }
+    roses.push({ el:el, rays:rays, live:false });
+  });
+
+  var roseRunning = false;
+  function aimRoses(mx, my){
+    var vh = window.innerHeight, any = false;
+    for(var r=0;r<roses.length;r++){
+      var o = roses[r], box = o.el.getBoundingClientRect();
+      if(box.width < 2 || box.bottom < -120 || box.top > vh + 120){
+        if(o.live){ relax(o); any = true; }
+        continue;
+      }
+      var cx = box.left + box.width/2, cy = box.top + box.height/2;
+      var dx = mx - cx, dy = my - cy;
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      var reach = Math.max(box.width * 2.2, 320);
+      if(dist > reach){ if(o.live){ relax(o); any = true; } continue; }
+      var near = 1 - dist/reach;
+      var phi = Math.atan2(dy, dx) * 180/Math.PI;
+      for(var i=0;i<o.rays.length;i++){
+        var ray = o.rays[i];
+        var d = phi - ray.ang;
+        while(d > 180) d -= 360;
+        while(d < -180) d += 360;
+        var lobe = Math.cos(d * Math.PI/180);
+        lobe = lobe > 0 ? lobe*lobe*lobe : 0;          // tight, directional pull
+        ray.target = ray.base * (1 + near * lobe * 0.95);
+      }
+      o.live = true; any = true;
+    }
+    if(any && !roseRunning){ roseRunning = true; requestAnimationFrame(roseFrame); }
+  }
+  function relax(o){
+    for(var i=0;i<o.rays.length;i++){ o.rays[i].target = o.rays[i].base; }
+    o.live = false;
+  }
+  function roseFrame(){
+    var busy = false;
+    for(var r=0;r<roses.length;r++){
+      var rays = roses[r].rays;
+      for(var i=0;i<rays.length;i++){
+        var ray = rays[i], diff = ray.target - ray.cur;
+        if(Math.abs(diff) > 0.004){
+          ray.cur += diff * 0.16;
+          ray.el.style.setProperty("--len", ray.cur.toFixed(3));
+          busy = true;
+        }
+      }
+    }
+    if(busy) requestAnimationFrame(roseFrame); else roseRunning = false;
+  }
+
+  /* ================= strings ================= */
+  var strings = [], running = false, touched = false;
+  var hint = document.getElementById("hint");
+  if(hint && coarse) hint.textContent = "스크롤하면 선이 울립니다";
+  function hideHint(){
+    touched = true;
+    if(hint && !hint.classList.contains("gone")) hint.classList.add("gone");
+  }
+
+  function Str(el){
+    this.el = el; this.ctx = el.getContext("2d");
+    this.tone = el.getAttribute("data-tone") === "dark";
+    this.weight = parseFloat(el.getAttribute("data-weight") || "1");
+    this.y = []; this.v = []; this.seed = Math.random()*Math.PI*2; this.energy = 0;
+    this.size();
+  }
+  Str.prototype.size = function(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.w = this.el.clientWidth || 1; this.h = this.el.clientHeight || 40;
+    this.el.width = Math.floor(this.w*dpr); this.el.height = Math.floor(this.h*dpr);
+    this.ctx.setTransform(dpr,0,0,dpr,0,0);
+    this.n = Math.max(12, Math.round(this.w/7) + 1);
+    this.gap = this.w/(this.n-1);
+    var y=[], v=[];
+    for(var i=0;i<this.n;i++){ y.push(0); v.push(0); }
+    this.y=y; this.v=v; this.energy=0;
+    this.render();
+  };
+  Str.prototype.pull = function(px, py, vy, silent){
+    var idx = Math.round(px/this.gap);
+    if(idx < 1 || idx > this.n-2) return;
+    var target = Math.max(-this.h*0.42, Math.min(this.h*0.42, py - this.h/2));
+    var reach = Math.round(this.n*0.16);
+    for(var d=-reach; d<=reach; d++){
+      var i = idx+d;
+      if(i<1 || i>this.n-2) continue;
+      var f = Math.cos((d/reach)*Math.PI*0.5); f = f*f;
+      this.y[i] += (target - this.y[i]) * f * 0.36;
+      this.v[i] += vy * f * 0.11;
+    }
+    this.energy = 1;
+    if(!silent) hideHint();
+    wake();
+  };
+  Str.prototype.impulse = function(force){
+    if(Math.abs(force) < 0.05) return;
+    for(var i=1;i<this.n-1;i++){
+      var u = i/(this.n-1);
+      this.v[i] += force * Math.sin(Math.PI*u) * (0.72 + 0.28*Math.sin(u*Math.PI*2 + this.seed));
+    }
+    this.energy = 1; wake();
+  };
+  Str.prototype.step = function(){
+    if(this.energy <= 0) return false;
+    var y=this.y, v=this.v, n=this.n, e=0, i;
+    for(i=1;i<n-1;i++){
+      var a = (y[i-1] + y[i+1] - 2*y[i]) * 0.42;
+      a -= y[i] * 0.011;          // pulls back to rest ~3x sooner; no long tail of wobble
+      v[i] = (v[i] + a) * 0.982;   // settles sooner, so a line is rarely still ringing
+    }
+    var lim = this.h*0.45;
+    for(i=1;i<n-1;i++){
+      y[i] += v[i];
+      if(y[i] > lim){ y[i] = lim; v[i] *= -0.4; }
+      else if(y[i] < -lim){ y[i] = -lim; v[i] *= -0.4; }
+      e += Math.abs(v[i]) + Math.abs(y[i])*0.05;
+    }
+    y[0]=0; y[n-1]=0; v[0]=0; v[n-1]=0;
+    // e sums across every point, so the cutoff scales with the line's resolution
+    this.energy = e < this.n * 0.035 ? 0 : 1;
+    if(this.energy === 0){ for(i=0;i<n;i++){ y[i]=0; v[i]=0; } }
+    this.render();
+    return this.energy > 0;
+  };
+  Str.prototype.render = function(){
+    var c = this.ctx, cy = this.h/2, peak = 0, i;
+    c.clearRect(0,0,this.w,this.h);
+    for(i=0;i<this.n;i++){ var m = Math.abs(this.y[i]); if(m>peak) peak = m; }
+    var t = Math.min(1, peak/(this.h*0.3));
+    c.beginPath();
+    c.moveTo(0, cy + this.y[0]);
+    for(i=1;i<this.n;i++){ c.lineTo(i*this.gap, cy + this.y[i]); }
+    c.lineCap = "round";
+    c.lineWidth = this.weight * (1 + t*0.6);
+    c.strokeStyle = this.tone
+      ? (t > 0.02 ? "rgba(95,184,148," + (0.32 + t*0.62) + ")" : "rgba(239,241,237,.26)")
+      : (t > 0.02 ? "rgba(15,107,79," + (0.24 + t*0.7) + ")" : "rgba(15,20,18,.2)");
+    c.stroke();
+  };
+  function wake(){ if(running || reduce) return; running = true; requestAnimationFrame(tick); }
+  function tick(){
+    var any = false;
+    for(var i=0;i<strings.length;i++){ if(strings[i].step()) any = true; }
+    if(any) requestAnimationFrame(tick); else running = false;
+  }
+  document.querySelectorAll(".string").forEach(function(el){ strings.push(new Str(el)); });
+
+  /* ================= pointer ================= */
+  var glows = Array.prototype.slice.call(document.querySelectorAll(".glow"));
+  var last = { y:0 };
+  var queued = false, px = 0, py = 0;
+
+  function touchStrings(cx, cy){
+    for(var i=0;i<strings.length;i++){
+      var s = strings[i], r = s.el.getBoundingClientRect();
+      if(r.width < 2) continue;
+      var band = coarse ? 26 : 8;
+      if(cx >= r.left && cx <= r.right && cy >= r.top - band && cy <= r.bottom + band){
+        s.pull(cx - r.left, cy - r.top, (cy - last.y) * 0.5);
+      }
+    }
+    last.y = cy;
+  }
+  function moveGlow(cx, cy){
+    for(var i=0;i<glows.length;i++){
+      var g = glows[i], r = g.getBoundingClientRect();
+      if(cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom){
+        g.style.setProperty("--mx", (cx - r.left) + "px");
+        g.style.setProperty("--my", (cy - r.top) + "px");
+        g.classList.add("lit");
+      } else if(g.classList.contains("lit")){
+        g.classList.remove("lit");
+      }
+    }
+  }
+  function flush(){
+    queued = false;
+    aimRoses(px, py);
+    moveGlow(px, py);
+  }
+  window.addEventListener("pointermove", function(e){
+    if(reduce) return;
+    // strings read every raw event: batching them inflates the frame-to-frame
+    // delta that becomes the pluck velocity, and the line whips instead of stirring
+    touchStrings(e.clientX, e.clientY);
+    px = e.clientX; py = e.clientY;
+    if(!queued){ queued = true; requestAnimationFrame(flush); }
+  }, {passive:true});
+  window.addEventListener("pointerdown", function(e){
+    if(!reduce){ last.y = e.clientY - 14; touchStrings(e.clientX, e.clientY); }
+  }, {passive:true});
+
+  /* ================= work ================= */
+  var SECTORS = [
+    { id:"sw", nav:"소프트웨어 · AI 컨설팅", motif:"arcs",
+      head:"기술이 자리를 잡도록",
+      body:"무엇이 가능한지보다 무엇이 남을지를 먼저 봅니다. 기술은 들어오는 순간이 아니라 일상에 스며든 뒤에 평가받습니다. 그 지점을 염두에 두고 판단합니다.",
+      items:["가능성의 판별","구조를 보는 눈","정착까지의 호흡","그다음을 위한 여지"] },
+    { id:"biz", nav:"신규사업 개발", motif:"rays",
+      head:"다음이 될 것을 고르는 일",
+      body:"시작은 대개 확신이 아니라 가능성입니다. 그 가능성이 실제가 될 수 있는지 끝까지 따져보고, 될 만한 쪽으로 자원을 모읍니다. 남는 것은 결국 견딘 것들입니다.",
+      items:["기회의 발견","가능성의 검증","자원의 정렬","오래 가는 형태"] },
+    { id:"arts", nav:"문화예술 공연 기획", motif:"ripples",
+      head:"남는 시간을 만드는 일",
+      body:"공연은 끝나면 사라지지만 그날의 감각은 남습니다. 저희는 그 남는 것을 기준으로 판단합니다. 무대 위의 완성도보다 객석에서의 시간을 먼저 생각합니다.",
+      items:["경험의 설계","예술가와의 호흡","한 번뿐인 완성도","끝난 뒤에 남는 것"] },
+    { id:"music", nav:"음원 제작 · 컨설팅", motif:"wave",
+      head:"장면에 맞는 소리를 고르는 일",
+      body:"소리는 홀로 있지 않습니다. 놓이는 자리에 따라 같은 선율도 다른 것이 됩니다. 길이와 밀도, 무엇보다 비워 둘 곳을 그 장면에 맞춰 정합니다.",
+      items:["영화 · 영상 음악","명상 · 힐링 음악","숏폼용 짧은 음악","음원 제작 전반의 자문"] }
+  ];
+  var tabsEl = document.querySelector(".tabs"), panelsEl = document.querySelector(".panels");
+
+  SECTORS.forEach(function(s, i){
+    var b = document.createElement("button");
+    b.className = "tab"; b.type = "button"; b.setAttribute("role","tab");
+    b.id = "tab-"+s.id; b.setAttribute("aria-controls","p-"+s.id);
+    b.setAttribute("aria-selected", i===0 ? "true":"false");
+    b.innerHTML = '<span class="dot" aria-hidden="true"></span><span>'+s.nav+'</span>';
+    tabsEl.appendChild(b);
+
+    var p = document.createElement("div");
+    p.className = "panel"; p.id = "p-"+s.id; p.setAttribute("role","tabpanel");
+    p.setAttribute("aria-labelledby","tab-"+s.id);
+    p.setAttribute("data-on", i===0 ? "true":"false");
+    p.innerHTML = '<h3>'+s.head+'</h3><p>'+s.body+'</p><ul>'+
+      s.items.map(function(x){ return "<li>"+x+"</li>"; }).join("") +
+      '</ul><canvas class="motif" data-mode="'+s.motif+'" aria-hidden="true"></canvas>';
+    panelsEl.appendChild(p);
+
+    b.addEventListener("click", function(){ select(i); });
+    b.addEventListener("keydown", function(e){
+      if(e.key === "ArrowDown" || e.key === "ArrowRight"){ e.preventDefault(); select((i+1)%SECTORS.length, true); }
+      if(e.key === "ArrowUp" || e.key === "ArrowLeft"){ e.preventDefault(); select((i-1+SECTORS.length)%SECTORS.length, true); }
+    });
+  });
+
+  function select(i, focus){
+    SECTORS.forEach(function(s, j){
+      var on = i === j;
+      var tab = document.getElementById("tab-"+s.id);
+      var pan = document.getElementById("p-"+s.id);
+      tab.setAttribute("aria-selected", on ? "true":"false");
+      pan.setAttribute("data-on", on ? "true":"false");
+      if(on){
+        if(focus) tab.focus();
+        drawMotif(pan.querySelector(".motif"), s.motif);
+      }
+    });
+  }
+
+  function drawMotif(cv, mode){
+    if(!cv) return;
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    var w = cv.clientWidth || 400, h = cv.clientHeight || 200;
+    cv.width = w*dpr; cv.height = h*dpr;
+    var c = cv.getContext("2d");
+    c.setTransform(dpr,0,0,dpr,0,0);
+    var ink = "rgba(15,20,18,", acc = "rgba(15,107,79,";
+    var start = performance.now(), dur = reduce ? 1 : 1500;
+
+    function step(now){
+      var p = reduce ? 1 : Math.min(1,(now-start)/dur);
+      var e = 1 - Math.pow(1-p,3);
+      c.clearRect(0,0,w,h);
+      c.lineCap = "round";
+      var i;
+
+      if(mode === "arcs"){
+        var ax = -w*0.1, ay = h*0.5, n = 14;
+        for(i=0;i<n;i++){
+          var r = (w*0.18) + i*(w*0.072);
+          var hot = i === 4;
+          c.beginPath();
+          c.arc(ax, ay, r, -Math.PI*0.42*e, Math.PI*0.42*e);
+          c.strokeStyle = hot ? acc+(0.75*e)+")" : ink+(0.05 + (1-i/n)*0.1)*e+")";
+          c.lineWidth = hot ? 1.4 : 0.8;
+          c.stroke();
+        }
+      }
+
+      if(mode === "rays"){
+        var ox = w*0.06, oy = h*0.92, m = 22;
+        for(i=0;i<m;i++){
+          var ang = -Math.PI*0.52 + (i/(m-1))*Math.PI*0.46;
+          var len = (h*1.05) * (0.55 + 0.45*Math.sin(i*1.7)) * e;
+          var hot2 = i === 8;
+          c.beginPath();
+          c.moveTo(ox, oy);
+          c.lineTo(ox + Math.cos(ang)*len*1.7, oy + Math.sin(ang)*len);
+          c.strokeStyle = hot2 ? acc+(0.75*e)+")" : ink+(0.06 + (i%3)*0.03)*e+")";
+          c.lineWidth = hot2 ? 1.4 : 0.8;
+          c.stroke();
+        }
+      }
+
+      if(mode === "ripples"){
+        var rx = w*0.5, ry = h*1.02, rings = 12;
+        for(i=0;i<rings;i++){
+          var a2 = (w*0.06) + i*(w*0.052);
+          var hot3 = i === 3;
+          c.beginPath();
+          c.ellipse(rx, ry, a2*1.15, a2*0.62*e, 0, Math.PI*1.04, Math.PI*1.96);
+          c.strokeStyle = hot3 ? acc+(0.75*e)+")" : ink+(0.05 + (1-i/rings)*0.09)*e+")";
+          c.lineWidth = hot3 ? 1.4 : 0.8;
+          c.stroke();
+        }
+      }
+
+      if(mode === "wave"){
+        var rowsN = 7;
+        for(var row=0; row<rowsN; row++){
+          var yb = h*0.16 + row*(h*0.12);
+          var amp = (h*0.05 + row*h*0.012) * e;
+          var hot4 = row === 2;
+          c.beginPath();
+          for(var x=6; x<=w-6; x+=3){
+            var k = (x/w)*Math.PI*2;
+            var yy = yb + Math.sin(k*(1.1+row*0.36) + row*0.85) * amp * Math.sin((x/w)*Math.PI);
+            if(x===6) c.moveTo(x,yy); else c.lineTo(x,yy);
+          }
+          c.strokeStyle = hot4 ? acc+(0.8*e)+")" : ink+(0.05 + (1-row/rowsN)*0.08)*e+")";
+          c.lineWidth = hot4 ? 1.4 : 0.8;
+          c.stroke();
+        }
+      }
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ================= reveals, nav, copy ================= */
+  var io = new IntersectionObserver(function(en){
+    en.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add("in"); io.unobserve(x.target); } });
+  }, { threshold:.1, rootMargin:"0px 0px -6% 0px" });
+  document.querySelectorAll("section").forEach(function(s){ io.observe(s); });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav ul a[href^='#']"));
+  var navIo = new IntersectionObserver(function(en){
+    en.forEach(function(x){
+      if(x.isIntersecting) links.forEach(function(l){ l.classList.toggle("on", l.getAttribute("href") === "#"+x.target.id); });
+    });
+  }, { threshold:.35 });
+  ["work","contact"].forEach(function(id){
+    var el = document.getElementById(id); if(el) navIo.observe(el);
+  });
+
+  var nav = document.querySelector(".nav"), ticking = false, prevY = window.scrollY;
+  var darkPanels = Array.prototype.slice.call(document.querySelectorAll(".statement, .contact"));
+  function syncNavTone(){
+    var edge = nav.offsetHeight * 0.6, dark = false;
+    for(var i=0;i<darkPanels.length;i++){
+      var r = darkPanels[i].getBoundingClientRect();
+      if(r.top <= edge && r.bottom >= edge){ dark = true; break; }
+    }
+    nav.classList.toggle("over-dark", dark);
+  }
+  window.addEventListener("scroll", function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var y = window.scrollY, dv = y - prevY; prevY = y;
+      nav.classList.toggle("solid", y > 40);
+      syncNavTone();
+      // With a cursor the lines answer the cursor only — scrolling used to set every
+      // visible one going at once, which read as noise rather than response.
+      if(!reduce && coarse && Math.abs(dv) > 2){
+        var f = Math.max(-52, Math.min(52, dv)) * 0.052, vh = window.innerHeight;
+        for(var i=0;i<strings.length;i++){
+          var s = strings[i], r = s.el.getBoundingClientRect();
+          if(r.width < 2 || r.bottom < 0 || r.top > vh) continue;
+          s.impulse(-f * (0.68 + (i % 3) * 0.2));
+        }
+        {
+          // touch devices have no cursor: scrolling flexes the rays instead
+          var amt = Math.min(1, Math.abs(dv)/34);
+          for(var r2=0;r2<roses.length;r2++){
+            var o = roses[r2], box = o.el.getBoundingClientRect();
+            if(box.width < 2 || box.bottom < 0 || box.top > vh){ continue; }
+            for(var q=0;q<o.rays.length;q++){
+              var ray = o.rays[q];
+              ray.target = ray.base * (1 + amt * 0.42 * Math.abs(Math.sin(q*1.3 + y*0.006)));
+            }
+            o.live = true;
+          }
+          if(!roseRunning){ roseRunning = true; requestAnimationFrame(roseFrame); }
+          if(y > 60) hideHint();
+        }
+      }
+      ticking = false;
+    });
+  }, {passive:true});
+
+  var btn = document.getElementById("copy");
+  btn.addEventListener("click", function(){
+    var addr = document.getElementById("mail").textContent.trim();
+    function ok(){
+      btn.textContent = "복사했습니다"; btn.setAttribute("data-done","true");
+      setTimeout(function(){ btn.textContent = "주소 복사"; btn.removeAttribute("data-done"); }, 2000);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(addr).then(ok).catch(function(){ btn.textContent = "직접 복사해 주세요"; });
+    } else { btn.textContent = "직접 복사해 주세요"; }
+  });
+
+  var rt;
+  window.addEventListener("resize", function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){
+      strings.forEach(function(s){ s.size(); });
+      var on = document.querySelector('.panel[data-on="true"] .motif');
+      if(on) drawMotif(on, on.getAttribute("data-mode"));
+    }, 160);
+  });
+
+  setTimeout(function(){
+    strings.forEach(function(s){ s.size(); });
+    select(0);
+    if(!reduce && !touched){
+      var hero = strings[0];
+      if(hero) hero.pull(hero.w*0.62, hero.h/2 + 9, 2.4, true);   // demo pluck keeps the hint up
+    }
+  }, 600);
+})();
+</script>
+</body>
+</html>
