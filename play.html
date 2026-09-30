@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>딴짓 | 주식회사 라릭</title>
-<meta name="description" content="일하다 말고 만든 것들 — 중력 우편함, 감정 정원, 글자낙하, 하늘창, 소리그림, Letter Rain. 전부 만지면 반응합니다.">
+<meta name="description" content="일하다 말고 만든 것들 — 시간 발효실, 타자기 파도, 숨결 유리창, 무너지는 문장, 중력 우편함, 감정 정원, 글자낙하, 하늘창, 소리그림, Letter Rain. 전부 만지면 반응합니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
@@ -195,7 +195,7 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
 
   <section class="wrap" id="list">
     <canvas class="string rule" aria-hidden="true"></canvas>
-    <p class="label"><b>여섯 개</b> 전부 새 창에서 열립니다</p>
+    <p class="label"><b>열 개</b> 전부 새 창에서 열립니다</p>
     <div class="pieces"></div>
   </section>
 
@@ -223,6 +223,14 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
 
   /* ================= the pieces ================= */
   var ITEMS = [
+    { repo:"time_ferment", title:"시간 발효실", sketch:"ferment", how:"클릭 · 기다리기",
+      desc:"창을 열어 둔 시간만큼 반죽이 부풉니다. 빈 곳을 두드리면 발효가 빨라지고, 구워 낸 빵의 개수와 발효 기록이 쌓입니다." },
+    { repo:"type_waves", title:"타자기 파도", sketch:"sea", how:"타이핑 · 소리",
+      desc:"타자 소리가 파도 소리가 됩니다. 다 쓴 문장은 병에 담아 띄워 보낼 수 있습니다." },
+    { repo:"breath_window", title:"숨결 유리창", sketch:"fog", how:"마이크 · 드래그",
+      desc:"마이크에 입김을 불거나 스페이스를 누르면 유리창에 김이 서립니다. 손가락으로 쓰듯 마우스로 닦아 글씨를 남길 수 있습니다." },
+    { repo:"crumbling_sentence", title:"무너지는 문장", sketch:"tower", how:"드래그 · 클릭",
+      desc:"글자로 쌓은 탑에서 블록을 하나씩 빼냅니다. 탑은 물리대로 기울다 무너지고, 빼낸 글자를 모으면 새 문장이 됩니다." },
     { repo:"gravity_post", title:"중력 우편함", sketch:"orbit", how:"클릭",
       desc:"오늘의 뉴스가 행성이 됩니다. 기사 속 키워드가 편지처럼 날아가 저마다의 행성에 도착하고, 행성을 누르면 그 기사의 요약이 열립니다." },
     { repo:"mood_garden", title:"감정 정원", sketch:"bloom", how:"드래그",
@@ -278,6 +286,122 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
   // t: 0..1 progress for the resting frame, or a running clock when animating
   function draw(cv, mode, t){
     var g = fit(cv), c = g.c, w = g.w, h = g.h, i;
+
+    if(mode === "ferment"){
+      var jw = w*0.21, jh = h*0.66, jx = w*0.5, jy = h*0.9;
+      c.beginPath();                                     // the crock
+      c.moveTo(jx-jw/2, jy-jh); c.lineTo(jx-jw/2, jy-h*0.04);
+      c.quadraticCurveTo(jx-jw/2, jy, jx-jw/2+h*0.05, jy);
+      c.lineTo(jx+jw/2-h*0.05, jy);
+      c.quadraticCurveTo(jx+jw/2, jy, jx+jw/2, jy-h*0.04);
+      c.lineTo(jx+jw/2, jy-jh);
+      c.strokeStyle = ink(0.26); c.lineWidth = 1.1; c.stroke();
+
+      var rise = 0.32 + 0.42*(0.5 + 0.5*Math.sin(t*0.55));   // dough climbing the glass
+      var crown = jy - jh*rise;
+      c.beginPath();
+      c.moveTo(jx-jw/2, jy - h*0.05);
+      c.bezierCurveTo(jx-jw/2, crown, jx+jw/2, crown, jx+jw/2, jy - h*0.05);
+      c.strokeStyle = acc(0.8); c.lineWidth = 1.3; c.stroke();
+
+      for(i=0;i<5;i++){                                   // gas working its way up
+        var bt = (t*0.45 + i*0.21) % 1;
+        var bx2 = jx + (((i*37)%11)/11 - 0.5)*jw*0.62;
+        var by2 = jy - h*0.06 - bt*(jy - crown - h*0.04);
+        c.beginPath(); c.arc(bx2, by2, 1.4 + (i%3)*0.7, 0, Math.PI*2);
+        c.strokeStyle = ink(0.22*(1-bt) + 0.06); c.lineWidth = 0.9; c.stroke();
+      }
+      for(i=0;i<3;i++){                                   // time marks on the side
+        var my = jy - jh*(0.3 + i*0.25);
+        c.beginPath(); c.moveTo(jx+jw/2+4, my); c.lineTo(jx+jw/2+ (i===1?12:8), my);
+        c.strokeStyle = ink(0.18); c.lineWidth = 0.9; c.stroke();
+      }
+    }
+
+    if(mode === "sea"){
+      function swell(u, i, tt){
+        return Math.sin(u*6.4 + tt*0.9 + i*1.25) * 1 + Math.sin(u*2.8 - tt*0.55) * 0.45;
+      }
+      for(i=0;i<4;i++){
+        var wy = h*(0.34 + i*0.16), amp = h*0.115*(1 - i*0.14);
+        c.beginPath();
+        for(var sx2=0; sx2<=w; sx2+=4){
+          c.lineTo(sx2, wy + swell(sx2/w, i, t)*amp);
+        }
+        c.strokeStyle = i===1 ? acc(0.6) : ink(0.16 + (3-i)*0.035);
+        c.lineWidth = i===1 ? 1.3 : 0.9; c.stroke();
+      }
+      var bobX = w*0.72, u3 = bobX/w;
+      var bobY = h*(0.34 + 0.16) + swell(u3, 1, t)*h*0.115*0.86;
+      var bs = h*0.16;                                    // a bottle riding the swell
+      c.save();
+      c.translate(bobX, bobY - bs*0.42);
+      c.rotate(Math.sin(t*0.9)*0.26 - 0.18);
+      c.beginPath();
+      c.moveTo(-bs*0.52, -bs*0.26); c.lineTo(bs*0.10, -bs*0.26);
+      c.lineTo(bs*0.22, -bs*0.11); c.lineTo(bs*0.52, -bs*0.11);
+      c.lineTo(bs*0.52, bs*0.11);  c.lineTo(bs*0.22, bs*0.11);
+      c.lineTo(bs*0.10, bs*0.26);  c.lineTo(-bs*0.52, bs*0.26);
+      c.closePath();
+      c.strokeStyle = acc(0.9); c.lineWidth = 1.2; c.stroke();
+      c.beginPath();                                      // the note inside
+      c.moveTo(-bs*0.34, 0); c.lineTo(-bs*0.04, 0);
+      c.strokeStyle = acc(0.5); c.lineWidth = 1; c.stroke();
+      c.restore();
+    }
+
+    if(mode === "fog"){
+      var fx = w*0.18, fy = h*0.12, fw = w*0.64, fh = h*0.7;
+      c.beginPath(); c.rect(fx, fy, fw, fh);
+      c.strokeStyle = ink(0.28); c.lineWidth = 1.1; c.stroke();
+      c.beginPath();
+      c.moveTo(fx+fw/2, fy); c.lineTo(fx+fw/2, fy+fh);
+      c.moveTo(fx, fy+fh*0.5); c.lineTo(fx+fw, fy+fh*0.5);
+      c.strokeStyle = ink(0.16); c.lineWidth = 0.9; c.stroke();
+
+      c.save();                                           // condensation, hatched
+      c.beginPath(); c.rect(fx+1, fy+1, fw-2, fh-2); c.clip();
+      for(i=0;i<26;i++){
+        var hy = fy + (i/26)*fh + Math.sin(t*0.4 + i)*1.2;
+        var hx = fx + ((i*53)%17)/17*fw*0.3;
+        c.beginPath(); c.moveTo(hx, hy); c.lineTo(hx + fw*(0.18 + ((i*29)%13)/13*0.4), hy);
+        c.strokeStyle = ink(0.07); c.lineWidth = 2.2; c.stroke();
+      }
+      var wipe = 0.55 + 0.45*Math.sin(t*0.7);             // a finger clearing a line
+      c.beginPath();
+      c.moveTo(fx+fw*0.14, fy+fh*0.66);
+      c.bezierCurveTo(fx+fw*0.34, fy+fh*(0.66-0.4*wipe), fx+fw*0.62, fy+fh*(0.3+0.4*wipe), fx+fw*0.86, fy+fh*0.34);
+      c.strokeStyle = acc(0.55); c.lineWidth = 5; c.lineCap = "round"; c.stroke();
+      c.strokeStyle = "rgba(239,241,237,.9)"; c.lineWidth = 2.4; c.stroke();
+      c.restore();
+    }
+
+    if(mode === "tower"){
+      var tw2 = w*0.15, th2 = h*0.1, tx = w*0.44, ty0 = h*0.93;
+      var gap = 2, lean = Math.sin(t*0.6)*0.10;
+      for(i=0;i<6;i++){
+        if(i === gap) continue;
+        var above = i > gap ? 1 : 0;
+        var yy2 = ty0 - i*(th2*1.1) - (above ? th2*0.02 : 0);
+        c.save();
+        c.translate(tx, yy2 - th2/2);
+        if(above) c.rotate(lean * (i - gap) * 0.5);
+        c.beginPath(); c.rect(-tw2/2, -th2/2, tw2, th2);
+        c.strokeStyle = ink(0.28); c.lineWidth = 1; c.stroke();
+        c.beginPath(); c.moveTo(-tw2*0.22, th2*0.16); c.lineTo(tw2*0.22, th2*0.16);
+        c.strokeStyle = ink(0.16); c.lineWidth = 0.9; c.stroke();   // the letter on its face
+        c.restore();
+      }
+      var pull = 0.3 + 0.7*(0.5 + 0.5*Math.sin(t*0.6));    // the block being drawn out
+      c.save();
+      c.translate(tx + tw2*0.7 + pull*w*0.2, ty0 - gap*(th2*1.1) - th2/2 + pull*h*0.05);
+      c.rotate(pull*0.5);
+      c.beginPath(); c.rect(-tw2/2, -th2/2, tw2, th2);
+      c.strokeStyle = acc(0.85); c.lineWidth = 1.2; c.stroke();
+      c.restore();
+      c.beginPath(); c.moveTo(w*0.08, ty0 + 2); c.lineTo(w*0.92, ty0 + 2);
+      c.strokeStyle = ink(0.16); c.lineWidth = 1; c.stroke();
+    }
 
     if(mode === "orbit"){
       var cx = w*0.5, cy = h*0.58;
