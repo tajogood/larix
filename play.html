@@ -3,8 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>딴짓 | 주식회사 라릭</title>
-<meta name="description" content="일하다 말고 만든 것들 — 시간 발효실, 타자기 파도, 숨결 유리창, 무너지는 문장, 중력 우편함, 감정 정원, 글자낙하, 하늘창, 소리그림, Letter Rain. 전부 만지면 반응합니다.">
+<title>딴짓 | 주식회사 라릭 — 만져지는 웹 실험 10개</title>
+<meta name="description" content="주식회사 라릭이 일하다 말고 만든 웹 실험 10개 — 시간 발효실, 타자기 파도, 숨결 유리창, 무너지는 문장, 중력 우편함, 감정 정원, 글자낙하, 하늘창, 소리그림, Letter Rain. 전부 브라우저에서 바로 움직입니다.">
+<link rel="canonical" href="https://larix.kr/play.html">
+
+<meta name="naver-site-verification" content="06738f6520a6605735ff8c3f96e82963df24ed45" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="주식회사 라릭">
+<meta name="theme-color" content="#EFF1ED">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="주식회사 라릭">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://larix.kr/play.html">
+<meta property="og:title" content="딴짓 | 주식회사 라릭">
+<meta property="og:description" content="일하다 말고 만든 웹 실험 10개. 전부 만지면 반응합니다.">
+<meta property="og:image" content="https://larix.kr/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="딴짓 | 주식회사 라릭">
+<meta name="twitter:description" content="일하다 말고 만든 웹 실험 10개. 전부 만지면 반응합니다.">
+<meta name="twitter:image" content="https://larix.kr/og.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg stroke='%230F6B4F' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M20 6v8M20 26v8M6 20h8M26 20h8'/%3E%3Cpath d='M12.5 12.5l4 4M23.5 23.5l4 4M27.5 12.5l-4 4M16.5 23.5l-4 4' stroke-width='1.2'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='3' fill='%230F6B4F'/%3E%3C/svg%3E">
+
+<script>document.documentElement.className += " js";</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "딴짓 — 주식회사 라릭",
+  "description": "주식회사 라릭이 만든 인터랙티브 웹 실험 모음.",
+  "url": "https://larix.kr/play.html",
+  "inLanguage": "ko-KR",
+  "isPartOf": { "@type": "WebSite", "@id": "https://larix.kr/#website" },
+  "publisher": { "@type": "Organization", "@id": "https://larix.kr/#organization", "name": "주식회사 라릭" }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
@@ -102,8 +140,9 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-
 
 /* ---- string divider ---- */
 .string{ display:block; width:100%; height:46px; touch-action:pan-y; cursor:crosshair; }
-.rule{ transform:scaleX(0); transform-origin:left; transition:transform 1.1s cubic-bezier(.22,.7,.2,1); }
-.in .rule{ transform:scaleX(1); }
+.rule{ transform-origin:left; }
+.js .rule{ transform:scaleX(0); transition:transform 1.1s cubic-bezier(.22,.7,.2,1); }
+.js .in .rule{ transform:scaleX(1); }
 
 /* ---- header ---- */
 .head{ padding:clamp(7rem,16vh,10rem) 0 clamp(2rem,6vh,3.5rem); }
@@ -122,10 +161,11 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
   display:block; text-decoration:none; color:inherit;
   border-top:1px solid var(--line);
   padding:clamp(1.4rem,3vw,2rem) 0 clamp(1.8rem,4vw,2.6rem);
-  opacity:0; transform:translateY(8px);
-  transition:opacity .7s ease, transform .7s cubic-bezier(.22,.7,.2,1);
 }
-.in .piece{ opacity:1; transform:none; }
+/* Without JS nothing gets .in, so entries must be visible by default —
+   otherwise a crawler sees ten links it cannot read. */
+.js .piece{ opacity:0; transform:translateY(8px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,.7,.2,1); }
+.js .in .piece{ opacity:1; transform:none; }
 .piece .card{ width:100%; height:clamp(110px,15vh,140px); display:block; margin-bottom:1.3rem; }
 .piece h2{
   margin:0 0 .5rem; font-weight:400; letter-spacing:-.035em; line-height:1.3;
@@ -166,7 +206,7 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
   *,*::before,*::after{ transition-duration:.001ms !important; }
-  .piece{ opacity:1; transform:none; } .rule{ transform:scaleX(1); }
+  .js .piece{ opacity:1; transform:none; } .js .rule{ transform:scaleX(1); }
 }
 </style>
 </head>
@@ -196,7 +236,18 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
   <section class="wrap" id="list">
     <canvas class="string rule" aria-hidden="true"></canvas>
     <p class="label"><b>열 개</b> 전부 새 창에서 열립니다</p>
-    <div class="pieces"></div>
+    <div class="pieces">
+<a class="piece" href="https://tajogood.github.io/time_ferment/" target="_blank" rel="noopener"><canvas class="card" data-sketch="ferment" aria-hidden="true"></canvas><h2>시간 발효실</h2><p>창을 열어 둔 시간만큼 반죽이 부풉니다. 빈 곳을 두드리면 발효가 빨라지고, 구워 낸 빵의 개수와 발효 기록이 쌓입니다.</p><div class="meta"><span class="how">클릭 · 기다리기</span><span class="url">tajogood.github.io/time_ferment</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/type_waves/" target="_blank" rel="noopener"><canvas class="card" data-sketch="sea" aria-hidden="true"></canvas><h2>타자기 파도</h2><p>타자 소리가 파도 소리가 됩니다. 다 쓴 문장은 병에 담아 띄워 보낼 수 있습니다.</p><div class="meta"><span class="how">타이핑 · 소리</span><span class="url">tajogood.github.io/type_waves</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/breath_window/" target="_blank" rel="noopener"><canvas class="card" data-sketch="fog" aria-hidden="true"></canvas><h2>숨결 유리창</h2><p>마이크에 입김을 불거나 스페이스를 누르면 유리창에 김이 서립니다. 손가락으로 쓰듯 마우스로 닦아 글씨를 남길 수 있습니다.</p><div class="meta"><span class="how">마이크 · 드래그</span><span class="url">tajogood.github.io/breath_window</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/crumbling_sentence/" target="_blank" rel="noopener"><canvas class="card" data-sketch="tower" aria-hidden="true"></canvas><h2>무너지는 문장</h2><p>글자로 쌓은 탑에서 블록을 하나씩 빼냅니다. 탑은 물리대로 기울다 무너지고, 빼낸 글자를 모으면 새 문장이 됩니다.</p><div class="meta"><span class="how">드래그 · 클릭</span><span class="url">tajogood.github.io/crumbling_sentence</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/gravity_post/" target="_blank" rel="noopener"><canvas class="card" data-sketch="orbit" aria-hidden="true"></canvas><h2>중력 우편함</h2><p>오늘의 뉴스가 행성이 됩니다. 기사 속 키워드가 편지처럼 날아가 저마다의 행성에 도착하고, 행성을 누르면 그 기사의 요약이 열립니다.</p><div class="meta"><span class="how">클릭</span><span class="url">tajogood.github.io/gravity_post</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/mood_garden/" target="_blank" rel="noopener"><canvas class="card" data-sketch="bloom" aria-hidden="true"></canvas><h2>감정 정원</h2><p>지금의 마음 크기를 슬라이더로 맞추면 거기 어울리는 꽃이 피어납니다. 꽃말과 개화 시기가 적힌 표본 라벨이 함께 붙습니다.</p><div class="meta"><span class="how">드래그</span><span class="url">tajogood.github.io/mood_garden</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/letter_drop/" target="_blank" rel="noopener"><canvas class="card" data-sketch="stack" aria-hidden="true"></canvas><h2>글자낙하</h2><p>입력한 글자가 무게를 갖습니다. 집어서 던지고, 중력을 끄고, 화면을 흔들어 쏟아 버릴 수 있습니다.</p><div class="meta"><span class="how">키보드 · 마우스</span><span class="url">tajogood.github.io/letter_drop</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/sky_window/" target="_blank" rel="noopener"><canvas class="card" data-sketch="clouds" aria-hidden="true"></canvas><h2>하늘창</h2><p>시간에 따라 색이 바뀌는 창 하나. 구름을 끌어 흩고, 누르면 별똥별이 지나가고, 가끔 동물이 찾아옵니다.</p><div class="meta"><span class="how">클릭 · 드래그</span><span class="url">tajogood.github.io/sky_window</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/sound_sketch/" target="_blank" rel="noopener"><canvas class="card" data-sketch="wave" aria-hidden="true"></canvas><h2>소리그림</h2><p>선을 그으면 그대로 음악이 됩니다. 선의 높이가 음높이가 되어 왼쪽부터 재생되고, 음계와 음색을 골라 둘 수 있습니다.</p><div class="meta"><span class="how">드래그 · 스페이스</span><span class="url">tajogood.github.io/sound_sketch</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/letter_rain/" target="_blank" rel="noopener"><canvas class="card" data-sketch="rain" aria-hidden="true"></canvas><h2>Letter Rain</h2><p>글자가 비처럼 내려 바닥에 쌓입니다. 누른 키가 떨어지고, 클릭하면 터지고, 스페이스로 한 번에 쓸어냅니다.</p><div class="meta"><span class="how">키보드 · 클릭</span><span class="url">tajogood.github.io/letter_rain</span></div></a>
+      </div>
   </section>
 
   <section class="foot">
@@ -222,47 +273,15 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
   var INK = "15,20,18", ACC = "15,107,79";
 
   /* ================= the pieces ================= */
-  var ITEMS = [
-    { repo:"time_ferment", title:"시간 발효실", sketch:"ferment", how:"클릭 · 기다리기",
-      desc:"창을 열어 둔 시간만큼 반죽이 부풉니다. 빈 곳을 두드리면 발효가 빨라지고, 구워 낸 빵의 개수와 발효 기록이 쌓입니다." },
-    { repo:"type_waves", title:"타자기 파도", sketch:"sea", how:"타이핑 · 소리",
-      desc:"타자 소리가 파도 소리가 됩니다. 다 쓴 문장은 병에 담아 띄워 보낼 수 있습니다." },
-    { repo:"breath_window", title:"숨결 유리창", sketch:"fog", how:"마이크 · 드래그",
-      desc:"마이크에 입김을 불거나 스페이스를 누르면 유리창에 김이 서립니다. 손가락으로 쓰듯 마우스로 닦아 글씨를 남길 수 있습니다." },
-    { repo:"crumbling_sentence", title:"무너지는 문장", sketch:"tower", how:"드래그 · 클릭",
-      desc:"글자로 쌓은 탑에서 블록을 하나씩 빼냅니다. 탑은 물리대로 기울다 무너지고, 빼낸 글자를 모으면 새 문장이 됩니다." },
-    { repo:"gravity_post", title:"중력 우편함", sketch:"orbit", how:"클릭",
-      desc:"오늘의 뉴스가 행성이 됩니다. 기사 속 키워드가 편지처럼 날아가 저마다의 행성에 도착하고, 행성을 누르면 그 기사의 요약이 열립니다." },
-    { repo:"mood_garden", title:"감정 정원", sketch:"bloom", how:"드래그",
-      desc:"지금의 마음 크기를 슬라이더로 맞추면 거기 어울리는 꽃이 피어납니다. 꽃말과 개화 시기가 적힌 표본 라벨이 함께 붙습니다." },
-    { repo:"letter_drop", title:"글자낙하", sketch:"stack", how:"키보드 · 마우스",
-      desc:"입력한 글자가 무게를 갖습니다. 집어서 던지고, 중력을 끄고, 화면을 흔들어 쏟아 버릴 수 있습니다." },
-    { repo:"sky_window", title:"하늘창", sketch:"clouds", how:"클릭 · 드래그",
-      desc:"시간에 따라 색이 바뀌는 창 하나. 구름을 끌어 흩고, 누르면 별똥별이 지나가고, 가끔 동물이 찾아옵니다." },
-    { repo:"sound_sketch", title:"소리그림", sketch:"wave", how:"드래그 · 스페이스",
-      desc:"선을 그으면 그대로 음악이 됩니다. 선의 높이가 음높이가 되어 왼쪽부터 재생되고, 음계와 음색을 골라 둘 수 있습니다." },
-    { repo:"letter_rain", title:"Letter Rain", sketch:"rain", how:"키보드 · 클릭",
-      desc:"글자가 비처럼 내려 바닥에 쌓입니다. 누른 키가 떨어지고, 클릭하면 터지고, 스페이스로 한 번에 쓸어냅니다." }
-  ];
-
-  var host = document.querySelector(".pieces");
-  ITEMS.forEach(function(it){
-    var a = document.createElement("a");
-    a.className = "piece";
-    a.href = "https://tajogood.github.io/" + it.repo + "/";
-    a.target = "_blank"; a.rel = "noopener";
-    a.innerHTML =
-      '<canvas class="card" data-sketch="' + it.sketch + '" aria-hidden="true"></canvas>' +
-      '<h2>' + it.title + '</h2>' +
-      '<p>' + it.desc + '</p>' +
-      '<div class="meta"><span class="how">' + it.how + '</span>' +
-      '<span class="url">tajogood.github.io/' + it.repo + '</span></div>';
-    host.appendChild(a);
-
+  // The ten entries live in the HTML so crawlers and no-script readers get the
+  // links and the descriptions; here we only attach the hover sketches.
+  document.querySelectorAll(".piece").forEach(function(a){
     var cv = a.querySelector(".card");
+    if(!cv) return;
+    var mode = cv.getAttribute("data-sketch");
     var live = false;
-    function start(){ if(reduce || live) return; live = true; animate(cv, it.sketch, function(){ return live; }); }
-    function stop(){ live = false; draw(cv, it.sketch, 1); }
+    function start(){ if(reduce || live) return; live = true; animate(cv, mode, function(){ return live; }); }
+    function stop(){ live = false; draw(cv, mode, 1); }
     a.addEventListener("pointerenter", start);
     a.addEventListener("pointerleave", stop);
     a.addEventListener("focus", start);
