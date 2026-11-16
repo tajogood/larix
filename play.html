@@ -3,30 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>딴짓 | 주식회사 라릭 — 만져지는 웹 실험 10개</title>
-<meta name="description" content="주식회사 라릭이 일하다 말고 만든 웹 실험 10개 — 시간 발효실, 타자기 파도, 숨결 유리창, 무너지는 문장, 중력 우편함, 감정 정원, 글자낙하, 하늘창, 소리그림, Letter Rain. 전부 브라우저에서 바로 움직입니다.">
+<title>딴짓 | 주식회사 라릭 — 인터랙티브 웹 실험 열 개</title>
+<meta name="description" content="주식회사 라릭이 만든 인터랙티브 웹 실험 열 개. 시간 발효실, 타자기 파도, 숨결 유리창, 무너지는 문장, 중력 우편함, 감정 정원, 글자낙하, 하늘창, 소리그림, 글자비. 설치 없이 브라우저에서 바로 열립니다.">
 <link rel="canonical" href="https://larix.kr/play.html">
 
 <meta name="naver-site-verification" content="06738f6520a6605735ff8c3f96e82963df24ed45" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="주식회사 라릭">
-<meta name="theme-color" content="#EFF1ED">
+<meta name="theme-color" content="#0A0A12">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="주식회사 라릭">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="https://larix.kr/play.html">
 <meta property="og:title" content="딴짓 | 주식회사 라릭">
-<meta property="og:description" content="일하다 말고 만든 웹 실험 10개. 전부 만지면 반응합니다.">
+<meta property="og:description" content="주식회사 라릭이 만든 인터랙티브 웹 실험 열 개.">
 <meta property="og:image" content="https://larix.kr/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="딴짓 | 주식회사 라릭">
-<meta name="twitter:description" content="일하다 말고 만든 웹 실험 10개. 전부 만지면 반응합니다.">
+<meta name="twitter:description" content="주식회사 라릭이 만든 인터랙티브 웹 실험 열 개.">
 <meta name="twitter:image" content="https://larix.kr/og.png">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg stroke='%230F6B4F' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M20 6v8M20 26v8M6 20h8M26 20h8'/%3E%3Cpath d='M12.5 12.5l4 4M23.5 23.5l4 4M27.5 12.5l-4 4M16.5 23.5l-4 4' stroke-width='1.2'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='3' fill='%230F6B4F'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg stroke='%23FF6847' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M20 6v8M20 26v8M6 20h8M26 20h8'/%3E%3Cpath d='M12.5 12.5l4 4M23.5 23.5l4 4M27.5 12.5l-4 4M16.5 23.5l-4 4' stroke-width='1.2'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='3' fill='%23FF6847'/%3E%3C/svg%3E">
 
 <script>document.documentElement.className += " js";</script>
 
@@ -45,34 +45,50 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#EFF1ED;
-  --ink:#0E1211;
-  --text:#0F1412;
-  --soft:#6A736D;
-  --line:rgba(15,20,18,.14);
-  --accent:#0F6B4F;
-  --sans:"IBM Plex Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  /* index.html 과 같은 판 */
+  --ink:#0A0A12;
+  --deep:#05050A;
+  --bg:#0A0A12;
+  --paper:#F5F0E8;
+  --text:#F5F0E8;
+  --soft:rgba(245,240,232,.60);
+  --dim:rgba(245,240,232,.48);
+  --accent:#FF6847;
+  --aqua:#82E6DF;
+  --edge:rgba(255,255,255,.11);
+  --line:rgba(245,240,232,.13);
+  --radius:20px;
+  --serif:"Gowun Batang", "Apple SD Gothic Neo", serif;
+  --sans:"Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
   --pad:clamp(1.25rem,5vw,5rem);
   --maxw:80rem;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#EFF1ED; --text:#0F1412; --soft:#6A736D; }
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --bg:#0A0A12; --text:#F5F0E8; }
 }
-:root[data-theme="dark"]{ --bg:#EFF1ED; --text:#0F1412; --soft:#6A736D; }
 
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 body{
   margin:0; background:var(--bg); color:var(--text);
-  font-family:var(--sans); font-weight:300;
-  font-size:clamp(.9375rem,.9rem + .2vw,1.0625rem);
-  line-height:1.7; letter-spacing:-.012em; overflow-x:hidden;
+  font-family:var(--sans); font-weight:400;
+  font-size:clamp(.9375rem,.9rem + .18vw,1.0625rem);
+  line-height:1.8; letter-spacing:-.005em; overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  word-break:keep-all; overflow-wrap:break-word;
 }
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(720px 540px at var(--gx,72%) var(--gy,6%), rgba(155,116,255,.17), transparent 66%),
+    radial-gradient(1100px 620px at 72% -8%, rgba(155,116,255,.085), transparent 68%),
+    radial-gradient(900px 520px at 8% 22%, rgba(255,104,71,.055), transparent 70%);
+}
+#bgfield{ position:fixed; inset:0; z-index:0; pointer-events:none; }
 ::selection{ background:var(--accent); color:#fff; }
 a{ color:inherit; }
 a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
@@ -111,14 +127,10 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-
   margin-top:calc(max(2px, calc(var(--u) * 2)) / -2);
   background:currentColor; border-radius:50%;
 }
-.rosette.sm{ --rs:20px; }
-.rosette.md{ --rs:clamp(52px,9vw,96px); }
+.rosette.sm{ --rs:22px; }
+.rosette.md{ --rs:clamp(56px,8.2vw,106px); }
 .rosette.huge{ --rs:clamp(200px,46vw,440px); }
 
-/* ---- grid backdrop ---- */
-#grid{ position:fixed; inset:0; z-index:0; pointer-events:none; max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); }
-#grid div{ height:100%; background-image:repeating-linear-gradient(to right, rgba(15,20,18,.055) 0 1px, transparent 1px calc(100%/6)); }
-@media (max-width:860px){ #grid{ display:none; } }
 .layer{ position:relative; z-index:1; }
 
 /* ---- nav ---- */
@@ -127,16 +139,16 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-
   display:flex; align-items:center; justify-content:space-between; gap:1rem;
   padding:1.1rem var(--pad); font-size:.8125rem; transition:background-color .3s;
 }
-.nav.solid{ background:color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter:blur(10px); }
-.nav .mark{ display:flex; align-items:center; gap:.65rem; font-weight:600; letter-spacing:-.03em; font-size:1rem; text-decoration:none; color:var(--text); transition:color .3s; }
+.nav.solid{ background:color-mix(in srgb, var(--ink) 88%, transparent); backdrop-filter:blur(10px); }
+.nav .mark{ display:flex; align-items:center; gap:.6rem; font-family:var(--serif); font-size:1.1rem; letter-spacing:.01em; text-decoration:none; color:var(--text); transition:color .3s; }
 .nav ul{ display:flex; gap:clamp(1rem,2.5vw,2.25rem); list-style:none; margin:0; padding:0; }
 .nav ul a{ text-decoration:none; color:var(--soft); transition:color .25s; }
 .nav ul a:hover, .nav ul a.on{ color:var(--text); }
-.nav ul a.on{ font-weight:400; }
-.nav.over-dark{ background:color-mix(in srgb, var(--ink) 80%, transparent); }
-.nav.over-dark .mark{ color:#EFF1ED; }
-.nav.over-dark ul a{ color:#8E9A94; }
-.nav.over-dark ul a:hover, .nav.over-dark ul a.on{ color:#EFF1ED; }
+.nav ul a.on{ font-weight:500; }
+.nav.over-dark{ background:color-mix(in srgb, var(--deep) 88%, transparent); }
+.nav.over-dark .mark{ color:var(--paper); }
+.nav.over-dark ul a{ color:var(--soft); }
+.nav.over-dark ul a:hover, .nav.over-dark ul a.on{ color:var(--paper); }
 
 /* ---- string divider ---- */
 .string{ display:block; width:100%; height:46px; touch-action:pan-y; cursor:crosshair; }
@@ -147,14 +159,14 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-
 /* ---- header ---- */
 .head{ padding:clamp(7rem,16vh,10rem) 0 clamp(2rem,6vh,3.5rem); }
 .head .lockup{ display:flex; align-items:center; gap:clamp(1rem,3vw,2.2rem); }
-.head h1{ margin:0; font-weight:600; letter-spacing:-.05em; line-height:.9; font-size:clamp(2.6rem,9vw,6.5rem); }
-.head h1 .sub{ display:block; font-family:var(--mono); font-weight:400; font-size:clamp(.625rem,1.1vw,.75rem); letter-spacing:.4em; color:var(--soft); margin-top:1.1rem; }
-.head p{ margin:clamp(1.8rem,5vh,2.8rem) 0 0; font-size:clamp(1.05rem,2.2vw,1.55rem); font-weight:200; line-height:1.5; letter-spacing:-.03em; max-width:34ch; }
+.head h1{ margin:0; font-family:var(--serif); font-weight:400; letter-spacing:.012em; line-height:.95; font-size:clamp(2.8rem,9.5vw,7rem); }
+.head h1 .sub{ display:block; font-family:var(--serif); font-size:clamp(.78rem,1.3vw,.95rem); letter-spacing:.07em; color:var(--soft); margin-top:.9rem; line-height:1; }
+.head p{ margin:clamp(1.8rem,5vh,2.8rem) 0 0; font-family:var(--serif); font-size:clamp(1.15rem,2.5vw,1.75rem); line-height:1.55; letter-spacing:-.005em; max-width:26ch; }
 
 /* ---- pieces ---- */
 section{ padding:0 0 clamp(3rem,9vh,6rem); }
-.label{ font-family:var(--mono); font-size:.6875rem; color:var(--soft); margin:.5rem 0 clamp(1.8rem,5vh,3rem); display:flex; gap:1.2rem; align-items:baseline; }
-.label b{ font-weight:400; color:var(--text); }
+.label{ font-size:.875rem; color:var(--soft); margin:.7rem 0 clamp(1.8rem,5vh,3rem); display:flex; gap:1rem; align-items:baseline; }
+.label b{ font-weight:500; color:var(--text); }
 
 .pieces{ display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap:0 clamp(2rem,5vw,4.5rem); }
 .piece{
@@ -168,38 +180,46 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
 .js .in .piece{ opacity:1; transform:none; }
 .piece .card{ width:100%; height:clamp(110px,15vh,140px); display:block; margin-bottom:1.3rem; }
 .piece h2{
-  margin:0 0 .5rem; font-weight:400; letter-spacing:-.035em; line-height:1.3;
-  font-size:clamp(1.2rem,2.6vw,1.6rem);
-  display:inline-block; position:relative;
+  margin:0 0 .7rem; font-family:var(--serif); font-weight:400;
+  letter-spacing:-.005em; line-height:1.35;
+  font-size:clamp(1.28rem,2.7vw,1.7rem);
+  display:inline-block;
 }
-.piece h2::after{
+.piece h2 .ko{ display:inline-block; position:relative; }
+/* 열 개 중 하나만 영문 이름이던 것을 고치는 대신, 전부에 라틴 이름을 붙여
+   한글 이름 + 라틴 이름이라는 한 가지 체계로 만든다. */
+.piece h2 .en{
+  display:block; font-family:var(--sans); font-size:.72rem; font-weight:400;
+  letter-spacing:.09em; color:var(--dim); margin-top:.45rem;
+}
+.piece h2 .ko::after{
   content:""; position:absolute; left:0; right:0; bottom:-.12em; height:1px;
   background:var(--accent); transform:scaleX(0); transform-origin:left;
   transition:transform .45s cubic-bezier(.2,.7,.2,1);
 }
-.piece:hover h2::after, .piece:focus-visible h2::after{ transform:scaleX(1); }
-.piece p{ margin:0 0 1.1rem; font-size:.9375rem; color:color-mix(in srgb, var(--text) 82%, transparent); max-width:38ch; }
-.meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; font-family:var(--mono); font-size:.625rem; color:var(--soft); letter-spacing:.02em; }
+.piece:hover h2 .ko::after, .piece:focus-visible h2 .ko::after{ transform:scaleX(1); }
+.piece p{ margin:0 0 1.1rem; font-size:.9375rem; color:color-mix(in srgb, var(--text) 86%, transparent); max-width:38ch; }
+.meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; font-size:.75rem; color:var(--dim); }
 .meta .how{ color:var(--accent); }
 .meta .url{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%; }
 
 /* ---- footer ---- */
-.foot{ background:var(--ink); color:#EFF1ED; padding:clamp(4rem,12vh,7rem) 0 0; }
-.foot .label{ color:#7D8A84; }
-.foot .label b{ color:#EFF1ED; }
-.foot h2{ margin:0 0 clamp(1.6rem,5vh,2.4rem); font-weight:200; font-size:clamp(1.5rem,4.5vw,2.8rem); line-height:1.3; letter-spacing:-.04em; max-width:20ch; }
+.foot{ background:var(--deep); color:var(--text); border-top:1px solid var(--edge); padding:clamp(4rem,12vh,7rem) 0 0; }
+.foot .label{ color:var(--soft); }
+.foot .label b{ color:var(--paper); }
+.foot h2{ margin:0 0 clamp(1.6rem,5vh,2.4rem); font-family:var(--serif); font-weight:400; font-size:clamp(1.6rem,4.8vw,3rem); line-height:1.34; letter-spacing:-.01em; max-width:20ch; }
 .backrow{ display:flex; flex-wrap:wrap; gap:1rem 1.5rem; align-items:center; }
 .back{
-  font-weight:300; font-size:clamp(1.1rem,3vw,1.7rem); letter-spacing:-.035em; text-decoration:none;
-  border-bottom:1px solid rgba(239,241,237,.3); padding-bottom:.08em; transition:.3s;
+  font-family:var(--serif); font-size:clamp(1.15rem,3vw,1.8rem); letter-spacing:.005em; text-decoration:none;
+  border-bottom:1px solid var(--edge); padding-bottom:.08em; transition:.3s;
 }
-.back:hover{ color:#5FB894; border-color:#5FB894; }
-.fnote{ margin:clamp(3rem,9vh,5rem) 0 0; padding-top:2rem; border-top:1px solid rgba(239,241,237,.16); font-family:var(--mono); font-size:.625rem; color:#5E6A64; }
+.back:hover{ color:var(--accent); border-color:var(--accent); }
+.fnote{ margin:clamp(3rem,9vh,5rem) 0 0; padding-top:2rem; border-top:1px solid var(--edge); font-size:.75rem; color:var(--dim); }
 .bigrose{
   --big:clamp(200px,46vw,440px);
   display:flex; justify-content:center; align-items:flex-start;
   margin:clamp(2rem,7vh,4rem) 0 0; height:calc(var(--big) / 2); overflow:hidden;
-  color:rgba(239,241,237,.09); pointer-events:none;
+  color:rgba(245,240,232,.07); pointer-events:none;
 }
 .bigrose .rosette.huge{ --rs:var(--big); }
 
@@ -211,13 +231,13 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
 </style>
 </head>
 <body>
-
-<div id="grid" aria-hidden="true"><div></div></div>
+<canvas id="bgfield" aria-hidden="true"></canvas>
 
 <nav class="nav" aria-label="주요">
   <a class="mark" href="/"><span class="rosette sm" aria-hidden="true"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span>라릭</a>
   <ul>
     <li><a href="/#work">하는 일</a></li>
+    <li><a href="/product.html">제품</a></li>
     <li><a href="/play.html" class="on">딴짓</a></li>
     <li><a href="/#contact">문의</a></li>
   </ul>
@@ -230,23 +250,23 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
       <span class="rosette md" aria-hidden="true"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span>
       <h1>딴짓<span class="sub">SIDE TRACKS</span></h1>
     </div>
-    <p>일하다 말고 만든 것들입니다. 쓸모는 없고, 전부 만지면 반응합니다.</p>
+    <p>쓸모를 생각하지 않고 만든 것들입니다. 전부 브라우저에서 바로 열리고, 만지면 반응합니다.</p>
   </header>
 
   <section class="wrap" id="list">
     <canvas class="string rule" aria-hidden="true"></canvas>
     <p class="label"><b>열 개</b> 전부 새 창에서 열립니다</p>
     <div class="pieces">
-<a class="piece" href="https://tajogood.github.io/time_ferment/" target="_blank" rel="noopener"><canvas class="card" data-sketch="ferment" aria-hidden="true"></canvas><h2>시간 발효실</h2><p>창을 열어 둔 시간만큼 반죽이 부풉니다. 빈 곳을 두드리면 발효가 빨라지고, 구워 낸 빵의 개수와 발효 기록이 쌓입니다.</p><div class="meta"><span class="how">클릭 · 기다리기</span><span class="url">tajogood.github.io/time_ferment</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/type_waves/" target="_blank" rel="noopener"><canvas class="card" data-sketch="sea" aria-hidden="true"></canvas><h2>타자기 파도</h2><p>타자 소리가 파도 소리가 됩니다. 다 쓴 문장은 병에 담아 띄워 보낼 수 있습니다.</p><div class="meta"><span class="how">타이핑 · 소리</span><span class="url">tajogood.github.io/type_waves</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/breath_window/" target="_blank" rel="noopener"><canvas class="card" data-sketch="fog" aria-hidden="true"></canvas><h2>숨결 유리창</h2><p>마이크에 입김을 불거나 스페이스를 누르면 유리창에 김이 서립니다. 손가락으로 쓰듯 마우스로 닦아 글씨를 남길 수 있습니다.</p><div class="meta"><span class="how">마이크 · 드래그</span><span class="url">tajogood.github.io/breath_window</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/crumbling_sentence/" target="_blank" rel="noopener"><canvas class="card" data-sketch="tower" aria-hidden="true"></canvas><h2>무너지는 문장</h2><p>글자로 쌓은 탑에서 블록을 하나씩 빼냅니다. 탑은 물리대로 기울다 무너지고, 빼낸 글자를 모으면 새 문장이 됩니다.</p><div class="meta"><span class="how">드래그 · 클릭</span><span class="url">tajogood.github.io/crumbling_sentence</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/gravity_post/" target="_blank" rel="noopener"><canvas class="card" data-sketch="orbit" aria-hidden="true"></canvas><h2>중력 우편함</h2><p>오늘의 뉴스가 행성이 됩니다. 기사 속 키워드가 편지처럼 날아가 저마다의 행성에 도착하고, 행성을 누르면 그 기사의 요약이 열립니다.</p><div class="meta"><span class="how">클릭</span><span class="url">tajogood.github.io/gravity_post</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/mood_garden/" target="_blank" rel="noopener"><canvas class="card" data-sketch="bloom" aria-hidden="true"></canvas><h2>감정 정원</h2><p>지금의 마음 크기를 슬라이더로 맞추면 거기 어울리는 꽃이 피어납니다. 꽃말과 개화 시기가 적힌 표본 라벨이 함께 붙습니다.</p><div class="meta"><span class="how">드래그</span><span class="url">tajogood.github.io/mood_garden</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/letter_drop/" target="_blank" rel="noopener"><canvas class="card" data-sketch="stack" aria-hidden="true"></canvas><h2>글자낙하</h2><p>입력한 글자가 무게를 갖습니다. 집어서 던지고, 중력을 끄고, 화면을 흔들어 쏟아 버릴 수 있습니다.</p><div class="meta"><span class="how">키보드 · 마우스</span><span class="url">tajogood.github.io/letter_drop</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/sky_window/" target="_blank" rel="noopener"><canvas class="card" data-sketch="clouds" aria-hidden="true"></canvas><h2>하늘창</h2><p>시간에 따라 색이 바뀌는 창 하나. 구름을 끌어 흩고, 누르면 별똥별이 지나가고, 가끔 동물이 찾아옵니다.</p><div class="meta"><span class="how">클릭 · 드래그</span><span class="url">tajogood.github.io/sky_window</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/sound_sketch/" target="_blank" rel="noopener"><canvas class="card" data-sketch="wave" aria-hidden="true"></canvas><h2>소리그림</h2><p>선을 그으면 그대로 음악이 됩니다. 선의 높이가 음높이가 되어 왼쪽부터 재생되고, 음계와 음색을 골라 둘 수 있습니다.</p><div class="meta"><span class="how">드래그 · 스페이스</span><span class="url">tajogood.github.io/sound_sketch</span></div></a>
-        <a class="piece" href="https://tajogood.github.io/letter_rain/" target="_blank" rel="noopener"><canvas class="card" data-sketch="rain" aria-hidden="true"></canvas><h2>Letter Rain</h2><p>글자가 비처럼 내려 바닥에 쌓입니다. 누른 키가 떨어지고, 클릭하면 터지고, 스페이스로 한 번에 쓸어냅니다.</p><div class="meta"><span class="how">키보드 · 클릭</span><span class="url">tajogood.github.io/letter_rain</span></div></a>
+<a class="piece" href="https://tajogood.github.io/time_ferment/" target="_blank" rel="noopener"><canvas class="card" data-sketch="ferment" aria-hidden="true"></canvas><h2><span class="ko">시간 발효실</span><span class="en">Time Ferment</span></h2><p>창을 열어 둔 시간만큼 반죽이 자랍니다. 빈 곳을 톡톡 누르면 발효가 빨라지고, 구운 빵의 수와 발효 일지가 쌓입니다.</p><div class="meta"><span class="how">클릭 · 기다리기</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/type_waves/" target="_blank" rel="noopener"><canvas class="card" data-sketch="sea" aria-hidden="true"></canvas><h2><span class="ko">타자기 파도</span><span class="en">Type Waves</span></h2><p>치는 속도가 바다를 바꿉니다. 빠르게 칠수록 물결이 거칠어지고, 다 쓴 문장은 병에 담아 띄워 보냅니다.</p><div class="meta"><span class="how">타이핑 · 소리</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/breath_window/" target="_blank" rel="noopener"><canvas class="card" data-sketch="fog" aria-hidden="true"></canvas><h2><span class="ko">숨결 유리창</span><span class="en">Breath Window</span></h2><p>마이크에 입김을 불거나 스페이스를 누르면 유리창에 김이 서립니다. 손가락으로 쓰듯 마우스로 닦아 글씨를 남깁니다.</p><div class="meta"><span class="how">마이크 · 드래그</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/crumbling_sentence/" target="_blank" rel="noopener"><canvas class="card" data-sketch="tower" aria-hidden="true"></canvas><h2><span class="ko">무너지는 문장</span><span class="en">Crumbling Sentence</span></h2><p>글자로 쌓은 탑에서 블록을 하나씩 빼냅니다. 욕심내면 와르르 무너지고, 빼낸 글자를 모아 새 문장을 만들 수 있습니다.</p><div class="meta"><span class="how">드래그 · 클릭</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/gravity_post/" target="_blank" rel="noopener"><canvas class="card" data-sketch="orbit" aria-hidden="true"></canvas><h2><span class="ko">중력 우편함</span><span class="en">Gravity Post</span></h2><p>지금 화제인 뉴스가 행성이 됩니다. 기사 속 키워드가 편지가 되어 저마다의 행성으로 날아가고, 행성을 누르면 그 기사의 요약이 열립니다.</p><div class="meta"><span class="how">클릭</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/mood_garden/" target="_blank" rel="noopener"><canvas class="card" data-sketch="bloom" aria-hidden="true"></canvas><h2><span class="ko">감정 정원</span><span class="en">Mood Garden</span></h2><p>오늘 마음의 크기를 슬라이더로 맞춥니다. 가장 큰 마음을 닮은 꽃이 가운데 자라고, 두 번째 마음의 꽃이 그 곁에 함께 핍니다. 꽃말과 키가 적힌 표본 라벨이 따라붙습니다.</p><div class="meta"><span class="how">드래그</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/letter_drop/" target="_blank" rel="noopener"><canvas class="card" data-sketch="stack" aria-hidden="true"></canvas><h2><span class="ko">글자낙하</span><span class="en">Letter Drop</span></h2><p>입력한 글자가 무게를 갖고, 집어서 던지거나 중력을 끄거나 화면을 흔들어 쏟아 버릴 수 있습니다.</p><div class="meta"><span class="how">키보드 · 마우스</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/sky_window/" target="_blank" rel="noopener"><canvas class="card" data-sketch="clouds" aria-hidden="true"></canvas><h2><span class="ko">하늘창</span><span class="en">Sky Window</span></h2><p>시간에 따라 색이 바뀌는 창 하나. 구름을 끌어 흩고 누르면 별똥별이 지나갑니다. 시간을 돌리거나 날씨를 바꿀 수 있고, 찾아온 동물을 누르면 말을 걸어 옵니다.</p><div class="meta"><span class="how">클릭 · 드래그</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/sound_sketch/" target="_blank" rel="noopener"><canvas class="card" data-sketch="wave" aria-hidden="true"></canvas><h2><span class="ko">소리그림</span><span class="en">Sound Sketch</span></h2><p>선을 그으면 높이가 그대로 음이 됩니다. 위로 갈수록 높은 음, 왼쪽에서 오른쪽으로 연주됩니다. 음계와 음색을 골라 둘 수 있습니다.</p><div class="meta"><span class="how">드래그 · 스페이스</span></div></a>
+        <a class="piece" href="https://tajogood.github.io/letter_rain/" target="_blank" rel="noopener"><canvas class="card" data-sketch="rain" aria-hidden="true"></canvas><h2><span class="ko">글자비</span><span class="en">Letter Rain</span></h2><p>글자가 비처럼 내려 바닥에 쌓입니다. 누른 키가 떨어지고 클릭하면 터지며, 와이퍼가 한 번에 쓸어냅니다.</p><div class="meta"><span class="how">키보드 · 클릭</span></div></a>
       </div>
   </section>
 
@@ -270,7 +290,7 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
-  var INK = "15,20,18", ACC = "15,107,79";
+  var INK = "245,240,232", ACC = "255,104,71";
 
   /* ================= the pieces ================= */
   // The ten entries live in the HTML so crawlers and no-script readers get the
@@ -391,7 +411,7 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
       c.moveTo(fx+fw*0.14, fy+fh*0.66);
       c.bezierCurveTo(fx+fw*0.34, fy+fh*(0.66-0.4*wipe), fx+fw*0.62, fy+fh*(0.3+0.4*wipe), fx+fw*0.86, fy+fh*0.34);
       c.strokeStyle = acc(0.55); c.lineWidth = 5; c.lineCap = "round"; c.stroke();
-      c.strokeStyle = "rgba(239,241,237,.9)"; c.lineWidth = 2.4; c.stroke();
+      c.strokeStyle = "rgba(10,10,18,.85)"; c.lineWidth = 2.4; c.stroke();
       c.restore();
     }
 
@@ -649,7 +669,7 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
     for(i=1;i<this.n;i++){ c.lineTo(i*this.gap, cy + this.y[i]); }
     c.lineCap = "round";
     c.lineWidth = 1 + t*0.6;
-    c.strokeStyle = t > 0.02 ? acc(0.24 + t*0.7) : ink(0.2);
+    c.strokeStyle = t > 0.02 ? "rgba(130,230,223," + (0.30 + t*0.65) + ")" : ink(0.20);
     c.stroke();
   };
   var running = false;
@@ -680,6 +700,79 @@ section{ padding:0 0 clamp(3rem,9vh,6rem); }
     en.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add("in"); io.unobserve(x.target); } });
   }, { threshold:.05, rootMargin:"0px 0px -4% 0px" });
   document.querySelectorAll("section").forEach(function(s){ io.observe(s); });
+
+
+  /* ================= 배경: 커서를 따라오는 빛과 눈금 밭 ================= */
+  (function(){
+    var cv = document.getElementById("bgfield");
+    if(!cv) return;
+    var ctx = cv.getContext("2d"), w=0, h=0, ticks=[], raf=0, settled=false;
+    var m = { tx:.72, ty:.10, x:.72, y:.10 };
+    var root = document.documentElement;
+
+    function build(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      cv.width = Math.floor(w*dpr); cv.height = Math.floor(h*dpr);
+      cv.getContext("2d").setTransform(dpr,0,0,dpr,0,0);
+      ctx = cv.getContext("2d");
+      var n = Math.max(26, Math.min(84, Math.round(w*h/17000)));
+      ticks = [];
+      for(var i=0;i<n;i++){
+        ticks.push({
+          bx:Math.random(), by:Math.random(),
+          z:.35 + Math.random()*.95,            // 깊이 — 시차의 크기를 정한다
+          len:5 + Math.random()*13,
+          a:Math.random()*Math.PI
+        });
+      }
+      draw();
+    }
+
+    function draw(){
+      if(!w) return;
+      ctx.clearRect(0,0,w,h);
+      ctx.lineCap = "round";
+      var mx = m.x*w, my = m.y*h, i, t;
+      for(i=0;i<ticks.length;i++){
+        t = ticks[i];
+        var x = t.bx*w + (m.x-.5)*58*t.z;
+        var y = t.by*h + (m.y-.5)*42*t.z;
+        var dx = x-mx, dy = y-my;
+        var near = Math.max(0, 1 - Math.sqrt(dx*dx+dy*dy)/330);
+        near = near*near;
+        var al = .045 + near*.40;
+        ctx.strokeStyle = near > .34
+          ? "rgba(255,104,71," + (al*.95).toFixed(3) + ")"
+          : "rgba(245,240,232," + al.toFixed(3) + ")";
+        ctx.lineWidth = .7 + near*.8;
+        var hx = Math.cos(t.a)*t.len*.5, hy = Math.sin(t.a)*t.len*.5;
+        ctx.beginPath(); ctx.moveTo(x-hx, y-hy); ctx.lineTo(x+hx, y+hy); ctx.stroke();
+      }
+    }
+
+    function frame(){
+      m.x += (m.tx - m.x) * .06;      // 느리게 따라붙는다 — 커서에 들러붙으면 싸구려로 보인다
+      m.y += (m.ty - m.y) * .06;
+      root.style.setProperty("--gx", (m.x*100).toFixed(2)+"%");
+      root.style.setProperty("--gy", (m.y*100).toFixed(2)+"%");
+      draw();
+      if(Math.abs(m.tx-m.x) > .0006 || Math.abs(m.ty-m.y) > .0006){ raf = requestAnimationFrame(frame); }
+      else { raf = 0; }
+    }
+    function wake(){ if(!raf && !reduce && !document.hidden) raf = requestAnimationFrame(frame); }
+
+    window.addEventListener("pointermove", function(e){
+      if(reduce) return;
+      m.tx = e.clientX/Math.max(1,w); m.ty = e.clientY/Math.max(1,h); wake();
+    }, {passive:true});
+    document.addEventListener("visibilitychange", function(){
+      if(document.hidden && raf){ cancelAnimationFrame(raf); raf = 0; } else wake();
+    });
+    var bt;
+    window.addEventListener("resize", function(){ clearTimeout(bt); bt = setTimeout(build, 160); });
+    build();
+  })();
 
   var nav = document.querySelector(".nav");
   var darkPanels = Array.prototype.slice.call(document.querySelectorAll(".foot"));

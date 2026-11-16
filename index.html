@@ -131,9 +131,14 @@ body{
 body::before{
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(1100px 620px at 72% -8%, rgba(155,116,255,.15), transparent 68%),
-    radial-gradient(900px 520px at 8% 22%, rgba(255,104,71,.065), transparent 70%);
+    radial-gradient(720px 540px at var(--gx,72%) var(--gy,6%), rgba(155,116,255,.17), transparent 66%),
+    radial-gradient(1100px 620px at 72% -8%, rgba(155,116,255,.085), transparent 68%),
+    radial-gradient(900px 520px at 8% 22%, rgba(255,104,71,.055), transparent 70%);
 }
+/* 커서를 따라오는 눈금 밭. goodform 은 점과 연결선을 쓰지만 라릭에는 이미
+   로제트의 살이 있으므로, 같은 원리(깊이별 시차 + 커서 근처에서 살아남)를
+   짧은 선분으로 쓴다. */
+#bgfield{ position:fixed; inset:0; z-index:0; pointer-events:none; }
 body > *{ position:relative; z-index:1; }
 a{ color:inherit; }
 a:focus-visible, button:focus-visible{ outline:2px solid var(--coral); outline-offset:3px; border-radius:2px; }
@@ -400,6 +405,7 @@ section{ padding:0; }               /* 여백은 .bod 안쪽에서만 — 선이
 </style>
 </head>
 <body>
+<canvas id="bgfield" aria-hidden="true"></canvas>
 
 <nav class="nav" aria-label="주요">
   <div class="nav-in">
@@ -886,6 +892,79 @@ section{ padding:0; }               /* 여백은 .bod 안쪽에서만 — 선이
       ticking = false;
     });
   }, {passive:true});
+
+
+  /* ================= 배경: 커서를 따라오는 빛과 눈금 밭 ================= */
+  (function(){
+    var cv = document.getElementById("bgfield");
+    if(!cv) return;
+    var ctx = cv.getContext("2d"), w=0, h=0, ticks=[], raf=0, settled=false;
+    var m = { tx:.72, ty:.10, x:.72, y:.10 };
+    var root = document.documentElement;
+
+    function build(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      cv.width = Math.floor(w*dpr); cv.height = Math.floor(h*dpr);
+      cv.getContext("2d").setTransform(dpr,0,0,dpr,0,0);
+      ctx = cv.getContext("2d");
+      var n = Math.max(26, Math.min(84, Math.round(w*h/17000)));
+      ticks = [];
+      for(var i=0;i<n;i++){
+        ticks.push({
+          bx:Math.random(), by:Math.random(),
+          z:.35 + Math.random()*.95,            // 깊이 — 시차의 크기를 정한다
+          len:5 + Math.random()*13,
+          a:Math.random()*Math.PI
+        });
+      }
+      draw();
+    }
+
+    function draw(){
+      if(!w) return;
+      ctx.clearRect(0,0,w,h);
+      ctx.lineCap = "round";
+      var mx = m.x*w, my = m.y*h, i, t;
+      for(i=0;i<ticks.length;i++){
+        t = ticks[i];
+        var x = t.bx*w + (m.x-.5)*58*t.z;
+        var y = t.by*h + (m.y-.5)*42*t.z;
+        var dx = x-mx, dy = y-my;
+        var near = Math.max(0, 1 - Math.sqrt(dx*dx+dy*dy)/330);
+        near = near*near;
+        var al = .045 + near*.40;
+        ctx.strokeStyle = near > .34
+          ? "rgba(255,104,71," + (al*.95).toFixed(3) + ")"
+          : "rgba(245,240,232," + al.toFixed(3) + ")";
+        ctx.lineWidth = .7 + near*.8;
+        var hx = Math.cos(t.a)*t.len*.5, hy = Math.sin(t.a)*t.len*.5;
+        ctx.beginPath(); ctx.moveTo(x-hx, y-hy); ctx.lineTo(x+hx, y+hy); ctx.stroke();
+      }
+    }
+
+    function frame(){
+      m.x += (m.tx - m.x) * .06;      // 느리게 따라붙는다 — 커서에 들러붙으면 싸구려로 보인다
+      m.y += (m.ty - m.y) * .06;
+      root.style.setProperty("--gx", (m.x*100).toFixed(2)+"%");
+      root.style.setProperty("--gy", (m.y*100).toFixed(2)+"%");
+      draw();
+      if(Math.abs(m.tx-m.x) > .0006 || Math.abs(m.ty-m.y) > .0006){ raf = requestAnimationFrame(frame); }
+      else { raf = 0; }
+    }
+    function wake(){ if(!raf && !reduce && !document.hidden) raf = requestAnimationFrame(frame); }
+
+    window.addEventListener("pointermove", function(e){
+      if(reduce) return;
+      m.tx = e.clientX/Math.max(1,w); m.ty = e.clientY/Math.max(1,h); wake();
+    }, {passive:true});
+    document.addEventListener("visibilitychange", function(){
+      if(document.hidden && raf){ cancelAnimationFrame(raf); raf = 0; } else wake();
+    });
+    var bt;
+    window.addEventListener("resize", function(){ clearTimeout(bt); bt = setTimeout(build, 160); });
+    build();
+  })();
 
   var btn = document.getElementById("copy");
   btn.addEventListener("click", function(){
