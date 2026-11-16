@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가축질병 추적 | 주식회사 라릭</title>
+<meta name="description" content="전국 농장의 가축질병 발생을 한 화면에서 따라가는 대시보드. 농장 분포와 발생·방역대를 겹쳐 보고, 시즌을 되감아 재생하고, 시군·주 단위 위험 모형으로 이번 주 발생 확률을 봅니다. 주식회사 라릭이 만들었습니다.">
+<link rel="canonical" href="https://larix.kr/product.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="주식회사 라릭">
+<meta name="theme-color" content="#0A0A12">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="주식회사 라릭">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://larix.kr/product.html">
+<meta property="og:title" content="가축질병 추적 | 주식회사 라릭">
+<meta property="og:description" content="전국 농장의 가축질병 발생을 한 화면에서 따라가는 대시보드.">
+<meta property="og:image" content="https://larix.kr/shots/board.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="가축질병 추적 | 주식회사 라릭">
+<meta name="twitter:description" content="전국 농장의 가축질병 발생을 한 화면에서 따라가는 대시보드.">
+<meta name="twitter:image" content="https://larix.kr/shots/board.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg stroke='%23FF6847' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M20 6v8M20 26v8M6 20h8M26 20h8'/%3E%3Cpath d='M12.5 12.5l4 4M23.5 23.5l4 4M27.5 12.5l-4 4M16.5 23.5l-4 4' stroke-width='1.2'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='3' fill='%23FF6847'/%3E%3C/svg%3E">
+
+<script>document.documentElement.className += " js";</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "가축질병 추적",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "inLanguage": ["ko-KR", "en"],
+  "url": "https://larix.kr/product.html",
+  "screenshot": "https://larix.kr/shots/board.jpg",
+  "author": { "@type": "Organization", "name": "주식회사 라릭", "@id": "https://larix.kr/#organization" },
+  "publisher": { "@id": "https://larix.kr/#organization" },
+  "description": "전국 농장의 가축질병 발생을 한 화면에서 따라가는 대시보드. 농장 분포·발생·방역대 중첩 지도, 시즌 재생, 시군·주 단위 위험 모형, 시즌별 누적 발생 비교."
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* 어두운 바탕 + 따뜻한 크림 글자 + 코랄. goodform.org.uk 의 톤을 가져왔다.
+     흰 글자가 아니라 크림(#F5F0E8)인 것이 이 톤의 핵심 — 검정 위 순백보다 덜 차갑다. */
+  --ink:#0A0A12;                      /* 바탕. 중성 검정이 아니라 보랏기 도는 검정 */
+  --deep:#05050A;                     /* 더 내려앉은 띠 (문의) */
+  --paper:#F5F0E8;                    /* 어두운 바탕 위의 밝은 색 */
+  --text:#F5F0E8;
+  --soft:rgba(245,240,232,.60);
+  --dim:rgba(245,240,232,.48);   /* .40 은 대비 3.46 으로 AA 미달 */
+  --coral:#FF6847;                    /* 누를 수 있는 것 */
+  --aqua:#82E6DF;                     /* 살아 있는 것 — 퉁긴 현 */
+  --raise:rgba(255,250,244,.055);     /* 유리면 채움 */
+  --edge:rgba(255,255,255,.11);       /* 유리면 테두리 */
+  --line:rgba(245,240,232,.13);
+  --line-dk:rgba(245,240,232,.13);
+  --radius:20px;
+  --serif:"Gowun Batang", "Apple SD Gothic Neo", serif;
+  --sans:"Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+  --d2:clamp(1.9rem,5.4vw,3.9rem);
+  --d3:clamp(1.5rem,3.4vw,2.4rem);
+  --lede:clamp(1.3rem,2.9vw,2.15rem);
+  --body:clamp(.9375rem,.9rem + .18vw,1.0625rem);
+  --sm:.875rem;
+  --xs:.75rem;
+  --pad:clamp(1.25rem,5vw,5rem);
+  --maxw:78rem;
+  --lf:12rem;
+  --gut:clamp(1.4rem,4vw,3.4rem);
+}
+/* 페이지가 이미 어둡다. 라이트 스킴에서도 같은 판을 쓴다. */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --ink:#0A0A12; --text:#F5F0E8; }
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--ink); color:var(--text);
+  font-family:var(--sans); font-weight:400;
+  font-size:var(--body); line-height:1.8; letter-spacing:-.005em;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  word-break:keep-all; overflow-wrap:break-word;
+}
+::selection{ background:var(--coral); color:var(--ink); }
+/* 레퍼런스는 성운 사진으로 바탕에 깊이를 준다. 남의 이미지를 가져오는 대신
+   같은 보랏기를 고정 그라디언트로만 깔아 둔다 — 글자 뒤로 아주 옅게. */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(1100px 620px at 72% -8%, rgba(155,116,255,.15), transparent 68%),
+    radial-gradient(900px 520px at 8% 22%, rgba(255,104,71,.065), transparent 70%);
+}
+body > *{ position:relative; z-index:1; }
+a{ color:inherit; }
+a:focus-visible, button:focus-visible{ outline:2px solid var(--coral); outline-offset:3px; border-radius:2px; }
+.contact a:focus-visible{ outline-color:var(--coral); }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad); }
+
+/* 두 밭 — index.html 과 같은 구조선 */
+.field{ display:grid; grid-template-columns:var(--lf) minmax(0,1fr); }
+.lab{ padding-right:var(--gut); padding-top:var(--sp,0); text-align:right; }
+.bod{
+  border-left:1px solid var(--line);
+  padding-left:var(--gut);
+  padding-top:var(--sp,0); padding-bottom:var(--sp,0);
+  min-width:0;
+}
+section{ padding:0; }
+.name{ font-size:var(--sm); color:var(--soft); margin:0; line-height:1.75; }
+.name b{ font-weight:500; color:var(--text); display:block; }
+@media (max-width:860px){
+  .field{ grid-template-columns:1fr; }
+  .lab{ padding-right:0; padding-bottom:1rem; text-align:left; }
+  .bod{ border-left:0; padding-left:0; padding-top:0; }
+}
+
+/* 로제트 (명함 확정안 B-2a) */
+.rosette{
+  --rs:22px; --u:calc(var(--rs) / 19.6);
+  position:relative; display:inline-block; flex:0 0 auto;
+  width:var(--rs); height:var(--rs); color:inherit;
+}
+.rosette .rot{ position:absolute; inset:0; }
+.rosette i{
+  position:absolute; left:50%; bottom:50%;
+  width:max(1px, calc(var(--u) * .6));
+  height:calc(var(--u) * var(--len,6.5));
+  margin-left:calc(max(1px, calc(var(--u) * .6)) / -2);
+  background:currentColor; border-radius:99px;
+  transform-origin:50% 100%;
+  transform:rotate(var(--a,0deg)) translateY(calc(var(--u) * -3));
+}
+.rosette i:nth-child(odd){ --len:6.5; }
+.rosette i:nth-child(even){ --len:4; }
+.rosette i:nth-child(1){ --a:0deg }    .rosette i:nth-child(2){ --a:22.5deg }
+.rosette i:nth-child(3){ --a:45deg }   .rosette i:nth-child(4){ --a:67.5deg }
+.rosette i:nth-child(5){ --a:90deg }   .rosette i:nth-child(6){ --a:112.5deg }
+.rosette i:nth-child(7){ --a:135deg }  .rosette i:nth-child(8){ --a:157.5deg }
+.rosette i:nth-child(9){ --a:180deg }  .rosette i:nth-child(10){ --a:202.5deg }
+.rosette i:nth-child(11){ --a:225deg } .rosette i:nth-child(12){ --a:247.5deg }
+.rosette i:nth-child(13){ --a:270deg } .rosette i:nth-child(14){ --a:292.5deg }
+.rosette i:nth-child(15){ --a:315deg } .rosette i:nth-child(16){ --a:337.5deg }
+.rosette b{
+  position:absolute; left:50%; top:50%;
+  width:max(2px, calc(var(--u) * 2)); height:max(2px, calc(var(--u) * 2));
+  margin-left:calc(max(2px, calc(var(--u) * 2)) / -2);
+  margin-top:calc(max(2px, calc(var(--u) * 2)) / -2);
+  background:currentColor; border-radius:50%;
+}
+.rosette.huge{ --rs:clamp(200px,44vw,420px); }
+
+/* nav */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:8;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:1.15rem var(--pad); font-size:var(--sm); transition:background-color .3s;
+}
+.nav-in{ max-width:var(--maxw); margin:0 auto; width:100%; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.nav.solid{ background:color-mix(in srgb, var(--ink) 88%, transparent); backdrop-filter:blur(10px); }
+.nav .mark{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--text); font-family:var(--serif); font-size:1.1rem; letter-spacing:.01em; transition:color .3s; }
+.nav ul{ display:flex; gap:clamp(.9rem,2.2vw,1.9rem); list-style:none; margin:0; padding:0; }
+.nav ul a{ text-decoration:none; color:var(--soft); transition:color .25s; }
+.nav ul a:hover, .nav ul a.on{ color:var(--text); }
+.nav.over-dark{ background:color-mix(in srgb, var(--deep) 88%, transparent); }
+.nav.over-dark .mark{ color:var(--paper); }
+.nav.over-dark ul a{ color:var(--soft); }
+.nav.over-dark ul a:hover, .nav.over-dark ul a.on{ color:var(--paper); }
+
+/* 머리 */
+.top .bod{ --sp:clamp(7rem,16vh,10rem); padding-bottom:clamp(3rem,8vh,5rem); }
+.top .lab{ --sp:clamp(7rem,16vh,10rem); }
+.back{ display:inline-block; font-size:var(--sm); color:var(--soft); text-decoration:none; margin-bottom:clamp(1.6rem,4vh,2.4rem); }
+.back:hover{ color:var(--text); }
+h1{
+  margin:0; font-family:var(--serif); font-weight:400;
+  font-size:clamp(2.4rem,7vw,5rem); line-height:1.12; letter-spacing:.005em;
+}
+.sub{ margin:1.4rem 0 0; font-family:var(--serif); font-size:var(--lede); line-height:1.55; max-width:26ch; }
+.openrow{ display:flex; flex-wrap:wrap; align-items:center; gap:.9rem 1.4rem; margin-top:clamp(2.2rem,6vh,3.2rem); }
+.open{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-size:var(--sm); text-decoration:none; color:var(--text);
+  border:1px solid var(--coral); border-radius:99px; padding:.62rem 1.2rem;
+  background:var(--coral); color:var(--ink); font-weight:600;   /* 흰 글자는 코랄 위에서 2.87, 먹은 6.88 */
+  box-shadow:0 8px 26px rgba(255,104,71,.26);
+  transition:filter .25s, box-shadow .25s;
+}
+.open:hover{ filter:brightness(1.08); box-shadow:0 10px 32px rgba(255,104,71,.38); }
+.open .dot{ width:6px; height:6px; border-radius:50%; background:var(--ink); flex:0 0 auto; opacity:.55; }
+.note{ margin:0; font-size:var(--xs); color:var(--soft); max-width:38ch; }
+
+/* 숫자 */
+.figs .bod{ --sp:clamp(3.5rem,9vh,5.5rem); }
+.figs .lab{ --sp:clamp(3.5rem,9vh,5.5rem); }
+.figrow{ display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:1.8rem 2.4rem; margin:0; }
+.figrow div{ min-width:0; }
+.figrow dt{ font-family:var(--serif); font-size:clamp(1.5rem,3.4vw,2.2rem); line-height:1.1; }
+.figrow dd{ margin:.5rem 0 0; font-size:var(--sm); color:var(--soft); }
+
+/* 화면 */
+.screens .bod{ --sp:clamp(3.5rem,9vh,5.5rem); }
+.screens .lab{ --sp:clamp(3.5rem,9vh,5.5rem); }
+.shot{ margin:0 0 clamp(3.2rem,9vh,5rem); }
+.shot:last-child{ margin-bottom:0; }
+.shot h2{
+  margin:0 0 .9rem; font-family:var(--serif); font-weight:400;
+  font-size:var(--d3); line-height:1.35; letter-spacing:-.005em;
+}
+.shot p{ margin:0 0 1.6rem; max-width:46ch; color:color-mix(in srgb, var(--text) 86%, transparent); }
+.shot img{
+  display:block; width:100%; height:auto;
+  border:1px solid var(--edge); border-radius:var(--radius); background:#000;
+}
+.shot figcaption{ margin-top:.7rem; font-size:var(--xs); color:var(--soft); }
+
+/* 출처 */
+.src .bod{ --sp:clamp(3.5rem,9vh,5.5rem); }
+.src .lab{ --sp:clamp(3.5rem,9vh,5.5rem); }
+.src ul{ list-style:none; margin:0 0 1.8rem; padding:0; font-size:var(--sm); display:grid; gap:.5rem; max-width:40ch; }
+.src li{ color:var(--soft); }
+.caveat{ margin:0; font-size:var(--sm); color:var(--soft); max-width:46ch; }
+
+/* 문의 */
+.contact{ background:var(--deep); color:var(--text); border-top:1px solid var(--edge); }
+.contact .bod{ border-left-color:var(--line-dk); --sp:clamp(5rem,13vh,8rem); }
+.contact .lab{ --sp:clamp(5rem,13vh,8rem); }
+.contact .name{ color:var(--soft); }
+.contact .name b{ color:var(--paper); }
+.contact h2{
+  margin:0 0 clamp(2rem,6vh,3rem); font-family:var(--serif); font-weight:400;
+  font-size:var(--d2); line-height:1.34; letter-spacing:-.01em; max-width:15ch;
+}
+.mail{
+  font-family:var(--serif); font-size:clamp(1.25rem,3.6vw,2.1rem); letter-spacing:.005em;
+  text-decoration:none; border-bottom:1px solid var(--edge); padding-bottom:.08em;
+  transition:border-color .3s, color .3s;
+}
+.mail:hover{ color:var(--coral); border-color:var(--coral); }
+.contact footer{ margin-top:clamp(3.5rem,10vh,6rem); padding-top:2rem; border-top:1px solid var(--line-dk); }
+.fnote{ margin:0; font-size:var(--xs); color:var(--dim); }
+.bigrose{
+  --big:clamp(200px,44vw,420px);
+  display:flex; justify-content:center; align-items:flex-start;
+  margin:clamp(2.5rem,9vh,5rem) 0 0;
+  height:calc(var(--big) / 2); overflow:hidden;
+  color:rgba(245,240,232,.07); pointer-events:none;
+}
+.bigrose .rosette.huge{ --rs:var(--big); }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ transition-duration:.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="주요">
+  <div class="nav-in">
+    <a class="mark" href="/"><span class="rosette" aria-hidden="true"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span>라릭</a>
+    <ul>
+      <li><a href="/#work">하는 일</a></li>
+      <li><a href="/product.html" class="on">제품</a></li>
+      <li><a href="/play.html">딴짓</a></li>
+      <li><a href="/#contact">문의</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap field">
+    <div class="lab"><p class="name"><b>제품</b></p></div>
+    <div class="bod">
+      <a class="back" href="/">← 라릭</a>
+      <h1>가축질병 추적</h1>
+      <p class="sub">전국 농장의 가축질병 발생을<br>한 화면에서 따라갑니다.</p>
+      <div class="openrow">
+        <a class="open" href="https://grammar-prefers-seats-possible.trycloudflare.com/" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span>직접 열어 보기</a>
+        <p class="note">개발 중인 시험 주소라 접속이 되지 않을 때가 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="figs">
+  <div class="wrap field">
+    <div class="lab"></div>
+    <div class="bod">
+      <dl class="figrow">
+        <div><dt>6,402</dt><dd>좌표를 가진 등록 농장</dd></div>
+        <div><dt>91,670</dt><dd>시군 × 주 분석 단위</dd></div>
+        <div><dt>12</dt><dd>분석에 쓴 시즌</dd></div>
+        <div><dt>0.924</dt><dd>2025/26 시즌 실전 예측력</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="screens">
+  <div class="wrap field">
+    <div class="lab"><p class="name"><b>화면</b></p></div>
+    <div class="bod">
+
+      <figure class="shot">
+        <h2>통합 상황판</h2>
+        <p>농장 분포와 발생 지점, 방역대를 한 지도에 겹쳐 놓습니다. 읍면동 사육두수, 축산차량 방문, 관측소 기온, 철새 이동 경로를 각각 켜고 끌 수 있습니다. 옆에는 위험 상위 시군과 최근 뉴스가 붙습니다.</p>
+        <img src="shots/board.jpg" alt="통합 상황판 화면. 왼쪽에 농장 분포와 발생 지점을 겹친 전국 지도, 위쪽에 농장 발생·야생 검출·이동제한·등록 농장 수치, 오른쪽에 위험 상위 시군 표가 있다." width="800" height="514" decoding="async">
+        <figcaption>가금·돼지·소를 나눠 보거나 질병별로 걸러 볼 수 있습니다.</figcaption>
+      </figure>
+
+      <figure class="shot">
+        <h2>발생 추적</h2>
+        <p>한 시즌을 처음부터 되감아 재생합니다. 발생이 날짜순으로 쌓이고, 점 위에 마우스를 올리면 날짜와 장소가, 눌러 보면 방역대와 가까운 거점소독시설이 지도에 표시됩니다.</p>
+        <img src="shots/replay.jpg" alt="발생 추적 화면. 위쪽에 시즌 재생 타임라인 슬라이더가 있고, 지도 위에 발생 지점이 보라색 원으로 누적되어 있다." width="800" height="514" loading="lazy" decoding="async">
+        <figcaption>재생 속도와 건너뛸 구간을 조절할 수 있습니다.</figcaption>
+      </figure>
+
+      <figure class="shot">
+        <h2>연관 분석</h2>
+        <p>시군과 주를 묶은 단위로 발생 위험을 추정합니다. 요인마다 위험이 몇 배가 되는지를 오차 범위와 함께 보여 줍니다. 30km 안에서 직전 2주에 발생이 있었으면 ×6.87, 직전 2주 기온이 8.1℃ 낮으면 ×2.04입니다. 각 주의 요인은 그 주 이전 자료로만 만듭니다.</p>
+        <img src="shots/risk.jpg" alt="연관 분석 화면. 왼쪽에 시군별 발생 확률을 점 크기와 색으로 표시한 지도, 오른쪽에 요인별 위험 배수를 신뢰구간과 함께 그린 가로 막대 그림이 있다." width="800" height="514" loading="lazy" decoding="async">
+        <figcaption>이번 주 발생 확률이 높은 시군을 순위로 뽑아 줍니다.</figcaption>
+      </figure>
+
+      <figure class="shot">
+        <h2>역대 분석</h2>
+        <p>시즌별 누적 발생 곡선을 겹쳐 같은 시점끼리 비교합니다. 올해가 지난 시즌들의 같은 주차에 견줘 어디쯤인지 바로 보입니다. 아래 표에는 시즌마다 첫 발생일과 마지막 발생일, 기간, 퍼진 시군 수와 두수가 붙습니다.</p>
+        <img src="shots/history.jpg" alt="역대 분석 화면. 2013/14 시즌부터 2026/27 시즌까지 누적 발생 곡선을 겹쳐 그린 꺾은선 그래프와, 시즌마다 발생 건수·첫 발생일·마지막 발생일·기간·시군 수·두수를 정리한 표." width="800" height="514" loading="lazy" decoding="async">
+        <figcaption>가금은 9월, 돼지와 소는 1월이 시즌의 시작입니다.</figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<section class="src">
+  <div class="wrap field">
+    <div class="lab"><p class="name"><b>자료</b></p></div>
+    <div class="bod">
+      <ul>
+        <li>가축 질병 발생 정보</li>
+        <li>행정안전부 동물·가축사육업 (농장 좌표)</li>
+        <li>기상청 ASOS 일자료</li>
+        <li>축산차량 방문 기록</li>
+        <li>보도자료와 발생현황 정보공개 (수기 입력)</li>
+      </ul>
+      <p class="caveat">과거 자료에서 함께 나타난 정도이며 원인을 증명하지는 않습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap field">
+    <div class="lab"><p class="name"><b>문의</b></p></div>
+    <div class="bod">
+      <h2>이 화면이 필요한<br>자리가 있다면</h2>
+      <a class="mail" href="mailto:david@larix.kr">david@larix.kr</a>
+      <footer>
+        <p class="fnote">© 2026 Larix Inc.</p>
+        <div class="bigrose" aria-hidden="true"><span class="rosette huge"><span class="rot"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></span></div>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+  var nav = document.querySelector(".nav");
+  var dark = document.querySelector(".contact");
+  var ticking = false;
+  function sync(){
+    nav.classList.toggle("solid", window.scrollY > 40);
+    if(dark){
+      var edge = nav.offsetHeight * 0.6, r = dark.getBoundingClientRect();
+      nav.classList.toggle("over-dark", r.top <= edge && r.bottom >= edge);
+    }
+  }
+  window.addEventListener("scroll", function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ sync(); ticking = false; });
+  }, {passive:true});
+  sync();
+})();
+</script>
+</body>
+</html>
