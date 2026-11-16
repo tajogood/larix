@@ -147,6 +147,9 @@ h1{ margin:0; font-family:var(--serif); font-weight:400; font-size:clamp(2rem,5.
   background:var(--raise); border:1px solid var(--edge); border-radius:99px; padding:.5rem 1.05rem;
 }
 .asof .dot{ width:7px; height:7px; border-radius:50%; background:var(--aqua); flex:0 0 auto; }
+.live{ margin:.9rem 0 0; font-size:var(--sm); }
+.live a{ color:var(--aqua); text-decoration:none; border-bottom:1px solid rgba(130,230,223,.4); padding-bottom:.1em; }
+.live a:hover{ border-bottom-color:var(--aqua); }
 .lede{ margin:1.6rem 0 0; font-family:var(--serif); font-size:var(--lede); line-height:1.6; max-width:34ch; }
 /* 숫자 */
 .figs .bod{ --sp:clamp(3rem,8vh,4.5rem); }
@@ -232,6 +235,7 @@ tr.now td:first-child{ color:var(--coral); }
       <a class="back" href="/product.html">← 가축질병 추적</a>
       <h1>2026/27 시즌<br>고병원성 조류인플루엔자<br>발생 현황</h1>
       <p class="asof"><span class="dot" aria-hidden="true"></span>가축 질병 발생 정보 2026년 11월 13일 기준</p>
+      <p class="live"><a href="https://tajogood.github.io/ldt-daily/" target="_blank" rel="noopener">매일 아침 갱신되는 현황판 열기 →</a></p>
       <p class="lede">이번 시즌 농장 발생은 여섯 건, 야생 검출은 한 건입니다. 직전 시즌 같은 기간보다 많습니다.</p>
     </div>
   </div>
@@ -338,10 +342,11 @@ tr.now td:first-child{ color:var(--coral); }
       <h2 style="margin:0 0 1rem; font-family:var(--serif); font-weight:400; font-size:var(--d3); line-height:1.35;">지도에서 직접 보기</h2>
       <p style="margin:0 0 1.5rem; max-width:44ch; color:color-mix(in srgb, var(--text) 88%, transparent);">발생 지점과 방역대, 농장 분포를 겹쳐 놓은 지도입니다. 시즌을 되감아 재생하거나 질병·축종별로 걸러 볼 수 있습니다.</p>
       <div class="ctarow">
-        <a class="open" href="https://grammar-prefers-seats-possible.trycloudflare.com/" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span>확인하기</a>
+        <a class="open" href="https://tajogood.github.io/ldt-daily/" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span>오늘의 현황 보기</a>
+        <a class="plain" href="https://grammar-prefers-seats-possible.trycloudflare.com/" target="_blank" rel="noopener">전체 대시보드 열기</a>
         <a class="plain" href="/product.html">무엇을 보여 주는지 먼저 읽기</a>
       </div>
-      <p class="note">개발 중인 시험 주소라 접속이 되지 않을 때가 있습니다.</p>
+      <p class="note">오늘의 현황은 매일 아침 자동으로 갱신됩니다. 전체 대시보드는 개발 중인 시험 주소라 접속이 되지 않을 때가 있습니다.</p>
     </div>
   </div>
 </section>
